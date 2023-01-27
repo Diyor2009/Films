@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+header {
+  background-color: red;
+  height: 80px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: 0.4s;
+  transition-delay: 0.2s;
+}
+
+.showed_header {
+  top: 0;
+}
+
+.closed_header {
+  top: -80px;
+}
+
+main {
+  font-size: 30px;
+}/*# sourceMappingURL=style.css.map */
