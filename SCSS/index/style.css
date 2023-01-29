@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("../../Fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf");
+  font-weight: lighter;
+  font-style: normal;
+}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,15 +14,88 @@ body {
   font-family: sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
 header {
-  background-color: red;
-  height: 80px;
+  background-color: #032541;
+  height: 64px;
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
+  padding: 0 130px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   transition: 0.4s;
   transition-delay: 0.2s;
+}
+header .header_navs_wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+header .header_navs_wrapper .header_brand {
+  height: 20px;
+  width: 154px;
+}
+header .header_navs_wrapper .header_nav {
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  color: white;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-size: 1em;
+}
+header .header_navs_wrapper .header_hovered_nav_wrapper {
+  position: relative;
+  padding: 10px;
+}
+header .header_navs_wrapper .header_hovered_nav_wrapper:hover > .hovered_nav_result {
+  display: block !important;
+}
+header .header_navs_wrapper .header_hovered_nav_wrapper .hovered_nav_result {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1px;
+  display: none;
+  background-color: white;
+  outline: 1px solid rgb(240, 240, 240);
+  padding: 6px 0;
+  width: 200px;
+  border-radius: 4px;
+}
+header .header_navs_wrapper .header_hovered_nav_wrapper .hovered_nav_result .result_list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  gap: 0;
+}
+header .header_navs_wrapper .header_hovered_nav_wrapper .hovered_nav_result .result_list .result_link {
+  padding: 6px 20px;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  color: black;
+  transition: 0.3s;
+}
+header .header_navs_wrapper .header_hovered_nav_wrapper .hovered_nav_result .result_list .result_link:hover {
+  background-color: #f8f9fa;
 }
 
 .showed_header {
@@ -28,5 +107,6 @@ header {
 }
 
 main {
-  font-size: 30px;
+  margin: 64px 0 0 0;
+  height: 300vh;
 }/*# sourceMappingURL=style.css.map */

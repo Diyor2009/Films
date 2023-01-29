@@ -1,12 +1,71 @@
 header {
-    background-color: red;
-    height: 80px;
+    background-color: $dark-blue;
+    height: 64px;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
+    padding: 0 130px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     transition: 0.4s;
     transition-delay: 0.2s;
+    .header_navs_wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+        width: fit-content;
+        .header_brand {
+            height: 20px;
+            width: 154px;
+        }
+        .header_nav {
+            font-family: 'Source Sans Pro', Arial, sans-serif;
+            color: white;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            font-size: 1em;
+        }
+        .header_hovered_nav_wrapper {
+            position: relative;
+            padding: 10px;
+            &:hover > .hovered_nav_result {
+                display: block !important;
+            }
+            .hovered_nav_result {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                z-index: 1px;
+                display: none;
+                background-color: white;
+                outline: 1px solid $light-gray;
+                padding: 6px 0;
+                width: 200px;
+                border-radius: 4px;
+                .result_list {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    height: 100%;
+                    gap: 0;
+                    .result_link {
+                        padding: 6px 20px;
+                        font-family: 'Source Sans Pro', Arial, sans-serif;
+                        color: black;
+                        transition: 0.3s;
+                        &:hover {
+                            background-color: $lighter-gray;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 .showed_header {
