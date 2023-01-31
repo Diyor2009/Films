@@ -34,5 +34,3 @@ async function fetchAPI(url) {
 
 function show(arr) {
 }
-
-// "Sniper: The White Raven"

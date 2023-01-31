@@ -28,14 +28,6 @@ main {
                 align-items: flex-start;
                 gap: 20px;
                 padding: 40px;
-                .top_head_title {
-                    font-weight: 700;
-                    font-size: 44px;
-                }
-                .top_head_about {
-                    font-weight: 600;
-                    font-size: 30px;
-                }
                 .main_search_wrapper {
                     width: 100%;
                     height: fit-content;
@@ -69,17 +61,51 @@ main {
                             border: none;
                             color: white;
                             background: linear-gradient(to right, rgba(30, 213, 169), rgba(1, 180, 228));
+                            &:hover {
+                                color: black;
+                            }
                         }
                     }
                 }
             }
             &:nth-child(1) {
-                background-image: url('https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,00192f,00baff)/zqkmTXzjkAgXmEWLRsY4UpTWCeo.jpg');
+                background-image: url("https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,00192f,00baff)/zqkmTXzjkAgXmEWLRsY4UpTWCeo.jpg");
+                .head_title {
+                    font-weight: 700;
+                    font-size: 44px;
+                }
+                .head_about {
+                    font-weight: 600;
+                    font-size: 30px;
+                }
             }
             &:nth-child(2) {
-                background-image: url(https://image.tmdb.org/t/p/w1920_and_h600_multi_faces/rGbRnRvkmrSub07ty89Vnlsh6UX.jpg);
+                background-image: url("https://image.tmdb.org/t/p/w1920_and_h600_multi_faces/rGbRnRvkmrSub07ty89Vnlsh6UX.jpg");
                 .main_head {
                     background-color: rgba(45,28,111,0.5);
+                }
+                .title_wrapper {
+                    font-weight: 600;
+                    font-size: 64px;
+                    text-transform: uppercase;
+                    border-bottom: 1px solid white;
+                }
+                .head_about {
+                    font-weight: 400;
+                    font-size: 18px;
+                }
+                .head_button {
+                    padding: 8px 24px;
+                    border-radius: 50px;
+                    background-color: transparent;
+                    color: white;
+                    border: 2px solid white;
+                    font-size: 17px;
+                    .arrow_to_right {
+                        width: 20px;
+                        height: 20px;
+                        background-color: red;
+                    }
                 }
             }
         }

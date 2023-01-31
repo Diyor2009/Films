@@ -35,6 +35,16 @@ li {
   border-radius: 8px;
 }
 
+button {
+  cursor: pointer;
+}
+
+.arrow_to_right {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-830-arrow-thin-right-white-27b356aac3227210acca2ae44fcfed8a6c0ca7adde4e867fe9793cae4ebda9d1.svg");
+}
+
 header {
   background-color: #032541;
   height: 64px;
@@ -152,14 +162,6 @@ main .main_head_images_wrapper .main_head_wrapper .main_head {
   gap: 20px;
   padding: 40px;
 }
-main .main_head_images_wrapper .main_head_wrapper .main_head .top_head_title {
-  font-weight: 700;
-  font-size: 44px;
-}
-main .main_head_images_wrapper .main_head_wrapper .main_head .top_head_about {
-  font-weight: 600;
-  font-size: 30px;
-}
 main .main_head_images_wrapper .main_head_wrapper .main_head .main_search_wrapper {
   width: 100%;
   height: -webkit-fit-content;
@@ -204,12 +206,46 @@ main .main_head_images_wrapper .main_head_wrapper .main_head .main_search_wrappe
   color: white;
   background: linear-gradient(to right, rgb(30, 213, 169), rgb(1, 180, 228));
 }
+main .main_head_images_wrapper .main_head_wrapper .main_head .main_search_wrapper .search_input_wrapper .search_button:hover {
+  color: black;
+}
 main .main_head_images_wrapper .main_head_wrapper:nth-child(1) {
   background-image: url("https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,00192f,00baff)/zqkmTXzjkAgXmEWLRsY4UpTWCeo.jpg");
 }
+main .main_head_images_wrapper .main_head_wrapper:nth-child(1) .head_title {
+  font-weight: 700;
+  font-size: 44px;
+}
+main .main_head_images_wrapper .main_head_wrapper:nth-child(1) .head_about {
+  font-weight: 600;
+  font-size: 30px;
+}
 main .main_head_images_wrapper .main_head_wrapper:nth-child(2) {
-  background-image: url(https://image.tmdb.org/t/p/w1920_and_h600_multi_faces/rGbRnRvkmrSub07ty89Vnlsh6UX.jpg);
+  background-image: url("https://image.tmdb.org/t/p/w1920_and_h600_multi_faces/rGbRnRvkmrSub07ty89Vnlsh6UX.jpg");
 }
 main .main_head_images_wrapper .main_head_wrapper:nth-child(2) .main_head {
   background-color: rgba(45, 28, 111, 0.5);
+}
+main .main_head_images_wrapper .main_head_wrapper:nth-child(2) .title_wrapper {
+  font-weight: 600;
+  font-size: 64px;
+  text-transform: uppercase;
+  border-bottom: 1px solid white;
+}
+main .main_head_images_wrapper .main_head_wrapper:nth-child(2) .head_about {
+  font-weight: 400;
+  font-size: 18px;
+}
+main .main_head_images_wrapper .main_head_wrapper:nth-child(2) .head_button {
+  padding: 8px 24px;
+  border-radius: 50px;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  font-size: 17px;
+}
+main .main_head_images_wrapper .main_head_wrapper:nth-child(2) .head_button .arrow_to_right {
+  width: 20px;
+  height: 20px;
+  background-color: red;
 }/*# sourceMappingURL=style.css.map */
