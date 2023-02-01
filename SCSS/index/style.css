@@ -47,6 +47,13 @@
 }
 .films_list_wrapper .list_head_wrapper .list_filter_wrapper .indicator {
   position: absolute;
+  top: 0;
+}
+.films_list_wrapper .list_head_wrapper .list_filter_wrapper .indicator_on_right {
+  right: 0;
+}
+.films_list_wrapper .list_head_wrapper .list_filter_wrapper .indicator_on_left {
+  left: 0;
 }
 
 * {

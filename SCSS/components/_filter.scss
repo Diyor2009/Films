@@ -34,6 +34,13 @@
             }
             .indicator {
                 position: absolute;
+                top: 0;
+            }
+            .indicator_on_right {
+                right: 0;
+            }
+            .indicator_on_left {
+                left: 0;
             }
         }
     }
