@@ -60,7 +60,7 @@ main {
                             align-items: center;
                             border: none;
                             color: white;
-                            background: linear-gradient(to right, rgba(30, 213, 169), rgba(1, 180, 228));
+                            background: $green-linear-gradient;
                             &:hover {
                                 color: black;
                             }
@@ -95,16 +95,21 @@ main {
                     font-size: 18px;
                 }
                 .head_button {
-                    padding: 8px 24px;
-                    border-radius: 50px;
+                    padding: 8px 16px;
+                    border-radius: 30px;
                     background-color: transparent;
                     color: white;
                     border: 2px solid white;
-                    font-size: 17px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    font-weight: 600;
+                    font-size: 1em;
+                    gap: 4px;
                     .arrow_to_right {
-                        width: 20px;
-                        height: 20px;
-                        background-color: red;
+                        width: 16px;
+                        height: 16px;
+                        display: block;
                     }
                 }
             }

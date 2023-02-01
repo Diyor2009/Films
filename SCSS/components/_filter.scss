@@ -1,0 +1,40 @@
+.films_list_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    .list_head_wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        .list_title {
+            font-size: 24px;
+            font-weight: 500;
+        }
+        .list_filter_wrapper {
+            display: flex;
+            flex-direction: row;
+            gap: 0;
+            width: fit-content;
+            height: fit-content;
+            border-radius: 30px;
+            outline: 1px solid $dark-blue;
+            padding: 0;
+            .filter_item {
+                margin: 0;
+                border-radius: 30px;
+                padding: 6px 18px;
+            }
+            .active {
+                background: $green-linear-gradient;
+                color: transparent;
+                -webkit-background-clip: text;
+                background-clip: text;
+            }
+            .indicator {
+                position: absolute;
+            }
+        }
+    }
+}

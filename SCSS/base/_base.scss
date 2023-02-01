@@ -34,6 +34,7 @@ button {
 }
 
 .arrow_to_right {
+    display: inline-block;
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url("https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-830-arrow-thin-right-white-27b356aac3227210acca2ae44fcfed8a6c0ca7adde4e867fe9793cae4ebda9d1.svg");

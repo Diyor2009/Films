@@ -4,6 +4,51 @@
   font-weight: lighter;
   font-style: normal;
 }
+.films_list_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+}
+.films_list_wrapper .list_head_wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.films_list_wrapper .list_head_wrapper .list_title {
+  font-size: 24px;
+  font-weight: 500;
+}
+.films_list_wrapper .list_head_wrapper .list_filter_wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 30px;
+  outline: 1px solid #032541;
+  padding: 0;
+}
+.films_list_wrapper .list_head_wrapper .list_filter_wrapper .filter_item {
+  margin: 0;
+  border-radius: 30px;
+  padding: 6px 18px;
+}
+.films_list_wrapper .list_head_wrapper .list_filter_wrapper .active {
+  background: linear-gradient(to right, rgb(30, 213, 169), rgb(1, 180, 228));
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.films_list_wrapper .list_head_wrapper .list_filter_wrapper .indicator {
+  position: absolute;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -40,6 +85,7 @@ button {
 }
 
 .arrow_to_right {
+  display: inline-block;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url("https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-830-arrow-thin-right-white-27b356aac3227210acca2ae44fcfed8a6c0ca7adde4e867fe9793cae4ebda9d1.svg");
@@ -237,15 +283,20 @@ main .main_head_images_wrapper .main_head_wrapper:nth-child(2) .head_about {
   font-size: 18px;
 }
 main .main_head_images_wrapper .main_head_wrapper:nth-child(2) .head_button {
-  padding: 8px 24px;
-  border-radius: 50px;
+  padding: 8px 16px;
+  border-radius: 30px;
   background-color: transparent;
   color: white;
   border: 2px solid white;
-  font-size: 17px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1em;
+  gap: 4px;
 }
 main .main_head_images_wrapper .main_head_wrapper:nth-child(2) .head_button .arrow_to_right {
-  width: 20px;
-  height: 20px;
-  background-color: red;
+  width: 16px;
+  height: 16px;
+  display: block;
 }/*# sourceMappingURL=style.css.map */
