@@ -9,7 +9,6 @@ const FILTERS = {
 
 var listFilters = [
     {
-        filterPosition: 1,
         filterName: "В тренде",
         filterId: "trend",
         filter: [
@@ -26,7 +25,6 @@ var listFilters = [
         ]
     },
     {
-        filterPosition: 1,
         filterName: "В тренде",
         filterId: "hello",
         filter: [
@@ -73,18 +71,31 @@ function scrollingEffect() {
 //     .then(obj => showMovie(obj.results, results_wrapper))
 // }
 
-function activateFilter(filterName) {
+function activateFilter(filterName, position) {
+    var item = document.getElementById(filterName);
+    var leftFilter = item.firstElementChild;
+    var rightFilter = leftFilter.nextSibling.nextElementSibling;
+    leftFilter.classList.remove("active_filter");
+    rightFilter.classList.remove("active_filter");
+    if (position == "left") {
+        leftFilter.classList.add("active_filter");
+    }
+    if (position == "right") {
+        rightFilter.classList.add("active_filter");
+    }
 }
 
 function showFilters() {
     listFilters.forEach(filter => {
-        let res = document.getElementById(filter.filterId);
-        res.classList.add("list_filter_wrapper");
-        res.innerHTML = `
-            <span class="filter_item active">${filter.filter[0].name}</span>
-            <span class="filter_item">${filter.filter[1].name}</span>
-            <span class="indicator" onclick="activateFilter(\`${filter.filterId}\`)"></span>
-        `
+        if (document.getElementById(filter.filterId)) {
+            let res = document.getElementById(filter.filterId);
+            res.classList.add("list_filter_wrapper");
+            res.innerHTML = `
+                <span class="filter_item active_filter" onclick="activateFilter(\`${filter.filterId}\`, \`left\`)">${filter.filter[0].name}</span>
+                <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \'right\')">${filter.filter[1].name}</span>
+                <span class="indicator"></span>
+            `;
+        }
     })
 }
 

@@ -39,7 +39,7 @@
   border-radius: 30px;
   padding: 6px 18px;
 }
-.films_list_wrapper .list_head_wrapper .list_filter_wrapper .active {
+.films_list_wrapper .list_head_wrapper .list_filter_wrapper .active_filter {
   background: linear-gradient(to right, rgb(30, 213, 169), rgb(1, 180, 228));
   color: transparent;
   -webkit-background-clip: text;
