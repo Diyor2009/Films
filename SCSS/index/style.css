@@ -8,8 +8,11 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
+  padding: 40px;
   width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 .films_list_wrapper .list_head_wrapper {
   display: flex;
@@ -17,8 +20,8 @@
   gap: 20px;
 }
 .films_list_wrapper .list_head_wrapper .list_title {
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 26px;
+  font-weight: 600;
 }
 .films_list_wrapper .list_head_wrapper .list_filter_wrapper {
   display: flex;
@@ -33,14 +36,23 @@
   border-radius: 30px;
   outline: 1px solid #032541;
   padding: 0;
+  position: relative;
 }
 .films_list_wrapper .list_head_wrapper .list_filter_wrapper .filter_item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
   border-radius: 30px;
-  padding: 6px 18px;
+  padding: 4px 20px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.films_list_wrapper .list_head_wrapper .list_filter_wrapper .filter_item:hover {
+  cursor: pointer;
 }
 .films_list_wrapper .list_head_wrapper .list_filter_wrapper .active_filter {
-  background: linear-gradient(to right, rgb(30, 213, 169), rgb(1, 180, 228));
+  background: linear-gradient(to right, #c0fecf 0%, #1ed5a9 100%);
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
@@ -48,6 +60,13 @@
 .films_list_wrapper .list_head_wrapper .list_filter_wrapper .indicator {
   position: absolute;
   top: 0;
+  left: 0;
+  background-color: #032541;
+  height: 100%;
+  display: block;
+  z-index: -1;
+  border-radius: 30px;
+  transition: 0.3s;
 }
 .films_list_wrapper .list_head_wrapper .list_filter_wrapper .indicator_on_right {
   right: 0;
@@ -185,7 +204,6 @@ main {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 90px;
 }
 main .main_head_images_wrapper {
   display: flex;
@@ -197,9 +215,7 @@ main .main_head_images_wrapper {
   height: fit-content;
 }
 main .main_head_images_wrapper .main_head_wrapper {
-  min-height: 300px;
-  height: 40vh;
-  max-height: 360px;
+  height: calc((100vh - 64px) / 2);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -306,4 +322,12 @@ main .main_head_images_wrapper .main_head_wrapper:nth-child(2) .head_button .arr
   width: 16px;
   height: 16px;
   display: block;
+}
+main .main_films_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  padding: 0 90px;
+  font-family: "Source Sans Pro", Arial, sans-serif;
 }/*# sourceMappingURL=style.css.map */

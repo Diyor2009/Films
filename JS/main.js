@@ -1,5 +1,6 @@
 var main_api_url = "https://api.themoviedb.org/3";
 var api_key = "d14b1adbe04d8ccc380f0580684188f5";
+var images_url = "https://image.tmdb.org/t/p/original";
 var header = document.getElementsByTagName("header")[0];
 
 const FILTERS = {
@@ -15,34 +16,28 @@ var listFilters = [
             {
                 type: "filter",
                 name: "Сегодня",
-                // activation: fetchAPI()
+                activation: function(f) {
+                    return fetchAPI(this.api);
+                },
+                api: FILTERS.trending_this_day,
             },
             {
                 type: "filter",
                 name: "На этой неделе",
-                // activation: fetchAPI()
-            },
-        ]
-    },
-    {
-        filterName: "В тренде",
-        filterId: "hello",
-        filter: [
-            {
-                type: "filter",
-                name: "Hello 1",
-                // activation: fetchAPI()
+                activation: function(f) {
+                    return fetchAPI(this.api);
+                },
+                api: FILTERS.trending_this_week,
             },
             {
-                type: "filter",
-                name: "Hello 2",
-                // activation: fetchAPI()
-            },
+                type: "indicator",
+                position: "left"
+            }
         ]
     },
-]
+];
 
-showFilters()
+showFilters();
 
 var windowPosition = window.pageYOffset;
 window.addEventListener('scroll', scrollingEffect);
@@ -62,26 +57,34 @@ function scrollingEffect() {
     windowPosition = scrollPosition;
 };
 
-// fetchAPI(FILTERS_API.trending);
-// fetchAPI(FILTERS.trending_this_week);
-
-// async function fetchAPI(url, page = 1, results_wrapper) {
-//     await fetch(`${main_api_url}${url}api_key=${api_key}&language-ru-RU&page=${page}`)
-//     .then(result => result.json())
-//     .then(obj => showMovie(obj.results, results_wrapper))
-// }
+async function fetchAPI(url, results_wrapper, page = 1) {
+    await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU&page=${page}`)
+    .then(result => result.json())
+    .then(obj => showMovie(obj.results, results_wrapper))
+}
 
 function activateFilter(filterName, position) {
-    var item = document.getElementById(filterName);
+    var item = document.querySelector(`#${filterName} > .list_filter_wrapper`);
     var leftFilter = item.firstElementChild;
     var rightFilter = leftFilter.nextSibling.nextElementSibling;
+    var indicator = rightFilter.nextElementSibling;
     leftFilter.classList.remove("active_filter");
     rightFilter.classList.remove("active_filter");
-    if (position == "left") {
+    if (position == "left" || leftFilter.className.includes("active_filter") || indicator.className.includes("indicator_on_left")) {
+        indicator.classList.remove("indicator_on_right");
+        rightFilter.classList.remove("active_filter");
         leftFilter.classList.add("active_filter");
+        indicator.style.left = "0";
+        indicator.style.width = `${leftFilter.offsetWidth}px`;
     }
-    if (position == "right") {
+    if (position == "right" || rightFilter.className.includes("active_filter") || indicator.className.includes("indicator_on_right")) {
+        indicator.classList.remove("indicator_on_left");
+        leftFilter.classList.remove("active_filter");
         rightFilter.classList.add("active_filter");
+        window.onunload = () => {
+            indicator.style.left = `${leftFilter.offsetWidth}px`;
+            indicator.style.width = `${rightFilter.offsetWidth}px`;
+        }
     }
 }
 
@@ -89,22 +92,31 @@ function showFilters() {
     listFilters.forEach(filter => {
         if (document.getElementById(filter.filterId)) {
             let res = document.getElementById(filter.filterId);
-            res.classList.add("list_filter_wrapper");
+            res.classList.add("list_head_wrapper");
             res.innerHTML = `
-                <span class="filter_item active_filter" onclick="activateFilter(\`${filter.filterId}\`, \`left\`)">${filter.filter[0].name}</span>
-                <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \'right\')">${filter.filter[1].name}</span>
-                <span class="indicator"></span>
+                <span class="list_title">${filter.filterName}</span>
+                <div class="list_filter_wrapper">
+                    <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \`left\`)">${filter.filter[0].name}</span>
+                    <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \'right\')">${filter.filter[1].name}</span>
+                    <span class="indicator indicator_on_${filter.filter[2].position}"></span>
+                </div>
             `;
+            activateFilter(filter.filterId);
         }
     })
 }
 
-// function showMovie(arr, resutls_wrapper) {
-//     var res = document.getElementById(resutls_wrapper);
-//     res.innerHTML = "";
+listFilters[0].filter[0].activation()
 
-//     arr.forEach(movie => {
-//         res.innerHTML += `
-//         `
-//     })
-// }
+function showMovie(arr, resutls_wrapper) {
+    // var res = document.getElementById(resutls_wrapper);
+    // res.innerHTML = "";
+
+    arr.forEach(movie => {
+        res.innerHTML += `
+            <div class="movie_card">
+                <img class="card" src="${images_url}${movie.poster_path}">
+            </div>
+        `
+    })
+}
