@@ -8,15 +8,20 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 40px;
+  padding: 40px 0 0 0;
   width: 100%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  background-image: url(https://www.themoviedb.org/assets/2/v4/misc/trending-bg-39afc2a5f77e31d469b25c187814c0a2efef225494c038098d62317d923f8415.svg);
+  background-repeat: no-repeat;
+  background-position: 50% 200px;
+  background-size: 100%;
 }
 .films_list_wrapper .list_head_wrapper {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 20px;
 }
 .films_list_wrapper .list_head_wrapper .list_title {
@@ -46,6 +51,7 @@
   border-radius: 30px;
   padding: 4px 20px;
   font-weight: 600;
+  color: #032541;
   transition: 0.3s;
 }
 .films_list_wrapper .list_head_wrapper .list_filter_wrapper .filter_item:hover {
@@ -74,6 +80,51 @@
 .films_list_wrapper .list_head_wrapper .list_filter_wrapper .indicator_on_left {
   left: 0;
 }
+.films_list_wrapper .films_list {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  overflow-x: auto;
+  padding: 40px;
+}
+.films_list_wrapper .films_list .card_wrapper {
+  width: 150px;
+  min-width: 150px;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+.films_list_wrapper .films_list .card_wrapper .card_img {
+  border-radius: 8px;
+  width: 100%;
+}
+.films_list_wrapper .films_list .card_wrapper .about_card_wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.films_list_wrapper .films_list .card_wrapper .popularity_wrapper {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  top: -20px;
+  left: 10px;
+  background-color: #081c22;
+  color: white;
+  border: 3px solid green;
+  outline: 2px solid #081c22;
+}
+.films_list_wrapper .films_list .card_wrapper .popularity_wrapper::after {
+  content: "%";
+  font-size: 8px;
+}
 
 * {
   box-sizing: border-box;
@@ -99,6 +150,7 @@ li {
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-thumb {

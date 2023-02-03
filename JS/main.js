@@ -2,6 +2,7 @@ var main_api_url = "https://api.themoviedb.org/3";
 var api_key = "d14b1adbe04d8ccc380f0580684188f5";
 var images_url = "https://image.tmdb.org/t/p/original";
 var header = document.getElementsByTagName("header")[0];
+var res_wrapper = document.getElementById("result");
 
 const FILTERS = {
     trending_this_day: "/trending/all/day?",
@@ -16,16 +17,16 @@ var listFilters = [
             {
                 type: "filter",
                 name: "Сегодня",
-                activation: function(f) {
-                    return fetchAPI(this.api);
+                activation: function(wrapper) {
+                    return fetchAPI(this.api, wrapper);
                 },
                 api: FILTERS.trending_this_day,
             },
             {
                 type: "filter",
                 name: "На этой неделе",
-                activation: function(f) {
-                    return fetchAPI(this.api);
+                activation: function(wrapper) {
+                    return fetchAPI(this.api, wrapper);
                 },
                 api: FILTERS.trending_this_week,
             },
@@ -58,7 +59,7 @@ function scrollingEffect() {
 };
 
 async function fetchAPI(url, results_wrapper, page = 1) {
-    await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU&page=${page}`)
+    await fetch(`${main_api_url}${url}api_key=${api_key}&page=${page}`)
     .then(result => result.json())
     .then(obj => showMovie(obj.results, results_wrapper))
 }
@@ -76,15 +77,15 @@ function activateFilter(filterName, position) {
         leftFilter.classList.add("active_filter");
         indicator.style.left = "0";
         indicator.style.width = `${leftFilter.offsetWidth}px`;
+        listFilters[0].filter[0].activation(filterName);
     }
     if (position == "right" || rightFilter.className.includes("active_filter") || indicator.className.includes("indicator_on_right")) {
+        listFilters[0].filter[1].activation(filterName);
         indicator.classList.remove("indicator_on_left");
         leftFilter.classList.remove("active_filter");
         rightFilter.classList.add("active_filter");
-        window.onunload = () => {
-            indicator.style.left = `${leftFilter.offsetWidth}px`;
-            indicator.style.width = `${rightFilter.offsetWidth}px`;
-        }
+        indicator.style.left = `${leftFilter.offsetWidth}px`;
+        indicator.style.width = `${rightFilter.offsetWidth}px`;
     }
 }
 
@@ -106,16 +107,26 @@ function showFilters() {
     })
 }
 
-listFilters[0].filter[0].activation()
 
-function showMovie(arr, resutls_wrapper) {
-    // var res = document.getElementById(resutls_wrapper);
-    // res.innerHTML = "";
+function showMovie(arr, results_wrapper) {
+    let res = document.getElementById(results_wrapper).nextElementSibling;
+    res.innerHTML = "";
 
     arr.forEach(movie => {
+        console.log(movie);
         res.innerHTML += `
-            <div class="movie_card">
-                <img class="card" src="${images_url}${movie.poster_path}">
+            <div class="card_wrapper">
+                <img class="card_img" src="${images_url}/${movie.poster_path}">
+                <div class="about_card_wrapper">
+                    <div class="popularity_wrapper">
+                        <div class="popularity">
+                            ${(movie.vote_average.toFixed(1)).split(".").join("")}
+                        </div>
+                    </div>
+                    <div class="card_title">
+                        ${movie.title ?? movie.original_name}
+                    </div>
+                </div>
             </div>
         `
     })
