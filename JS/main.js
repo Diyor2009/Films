@@ -7,6 +7,7 @@ var res_wrapper = document.getElementById("result");
 const FILTERS = {
     trending_this_day: "/trending/all/day?",
     trending_this_week: "/trending/all/week?",
+    latest_trailers: "",
 }
 
 var listFilters = [
@@ -59,7 +60,7 @@ function scrollingEffect() {
 };
 
 async function fetchAPI(url, results_wrapper, page = 1) {
-    await fetch(`${main_api_url}${url}api_key=${api_key}&page=${page}`)
+    await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU&page=${page}`)
     .then(result => result.json())
     .then(obj => showMovie(obj.results, results_wrapper))
 }
@@ -108,6 +109,7 @@ function showFilters() {
 }
 
 
+
 function showMovie(arr, results_wrapper) {
     let res = document.getElementById(results_wrapper).nextElementSibling;
     res.innerHTML = "";
@@ -115,19 +117,31 @@ function showMovie(arr, results_wrapper) {
     arr.forEach(movie => {
         console.log(movie);
         res.innerHTML += `
-            <div class="card_wrapper">
-                <img class="card_img" src="${images_url}/${movie.poster_path}">
-                <div class="about_card_wrapper">
-                    <div class="popularity_wrapper">
-                        <div class="popularity">
-                            ${(movie.vote_average.toFixed(1)).split(".").join("")}
-                        </div>
-                    </div>
-                    <div class="card_title">
-                        ${movie.title ?? movie.original_name}
+        <div class="card_wrapper">
+            <img class="card_img" src="${images_url}/${movie.poster_path}">
+            <div class="about_card_wrapper">
+                <div class="popularity_wrapper">
+                    <div class="popularity">
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle" stroke-dasharray="${+((movie.vote_average.toFixed(1)).split(".").join(""))}, 100"
+                                d="M18 2.0845
+                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                  a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                            </svg>
+                            <div class="popularity_percent">
+                                ${+((movie.vote_average.toFixed(1)).split(".").join(""))}
+                            </div>
                     </div>
                 </div>
+                <div class="card_title">
+                    ${movie.title ?? movie.name}
+                </div>
+                <div class="card_date">
+                    ${movie.release_date ?? movie.first_air_date}
+                </div>
             </div>
-        `
-    })
-}
+        </div>
+        `;
+    });
+};

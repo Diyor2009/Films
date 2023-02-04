@@ -81,33 +81,78 @@
             display: flex;
             flex-direction: column;
             .card_img {
+                min-height: calc(150px * 1.5);
                 border-radius: 8px;
                 width: 100%;
+                background-size: cover;
             }
             .about_card_wrapper {
                 position: relative;
                 display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .popularity_wrapper {
-                position: absolute;
-                width: 35px;
-                height: 35px;
-                border-radius: 50%;
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                top: -20px;
-                left: 10px;
-                background-color: $dark-gray;
-                color: white;
-                border: 3px solid green;
-                outline: 2px solid $dark-gray;
-                &::after {
-                    content: '%';
-                    font-size: 8px;
+                flex-direction: column;
+                gap: 4px;
+                padding: 24px 8px 8px 8px;
+                .popularity_wrapper {
+                    position: absolute;
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    top: -20px;
+                    left: 10px;
+                    background-color: $dark-gray;
+                    color: white;
+                    -webkit-background-clip: border;
+                    background-clip: border;
+                    outline: 1px solid $dark-gray;
+                    .popularity {
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        .circular-chart {
+                            position: absolute;
+                            z-index: 2;
+                            display: block;
+                            height: 100%;
+                            width: 100%;
+                            .circle {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                height: 100%;
+                                width: 100%;
+                                stroke: #4CC790;
+                                fill: none;
+                                stroke-width: 2px;
+                                stroke-linecap: round;
+                            }
+                        }
+                        .popularity_percent {
+                            font-size: 14px;
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            &::after {
+                                content: '%';
+                                position: relative;
+                                left: 1px;
+                                top: -2px;
+                                font-size: 6px;
+                            }
+                        }
+                    }
+                }
+                .card_title {
+                    font-weight: 600;
+                }
+                .card_date {
+                    font-weight: 100;
+                    color: gray;
                 }
             }
         }

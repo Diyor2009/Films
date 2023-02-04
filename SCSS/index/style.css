@@ -96,16 +96,19 @@
   flex-direction: column;
 }
 .films_list_wrapper .films_list .card_wrapper .card_img {
+  min-height: 225px;
   border-radius: 8px;
   width: 100%;
+  background-size: cover;
 }
 .films_list_wrapper .films_list .card_wrapper .about_card_wrapper {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  padding: 24px 8px 8px 8px;
 }
-.films_list_wrapper .films_list .card_wrapper .popularity_wrapper {
+.films_list_wrapper .films_list .card_wrapper .about_card_wrapper .popularity_wrapper {
   position: absolute;
   width: 35px;
   height: 35px;
@@ -118,12 +121,54 @@
   left: 10px;
   background-color: #081c22;
   color: white;
-  border: 3px solid green;
-  outline: 2px solid #081c22;
+  -webkit-background-clip: border;
+  background-clip: border;
+  outline: 1px solid #081c22;
 }
-.films_list_wrapper .films_list .card_wrapper .popularity_wrapper::after {
+.films_list_wrapper .films_list .card_wrapper .about_card_wrapper .popularity_wrapper .popularity {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.films_list_wrapper .films_list .card_wrapper .about_card_wrapper .popularity_wrapper .popularity .circular-chart {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.films_list_wrapper .films_list .card_wrapper .about_card_wrapper .popularity_wrapper .popularity .circular-chart .circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  stroke: #4CC790;
+  fill: none;
+  stroke-width: 2px;
+  stroke-linecap: round;
+}
+.films_list_wrapper .films_list .card_wrapper .about_card_wrapper .popularity_wrapper .popularity .popularity_percent {
+  font-size: 14px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.films_list_wrapper .films_list .card_wrapper .about_card_wrapper .popularity_wrapper .popularity .popularity_percent::after {
   content: "%";
-  font-size: 8px;
+  position: relative;
+  left: 1px;
+  top: -2px;
+  font-size: 6px;
+}
+.films_list_wrapper .films_list .card_wrapper .about_card_wrapper .card_title {
+  font-weight: 600;
+}
+.films_list_wrapper .films_list .card_wrapper .about_card_wrapper .card_date {
+  font-weight: 100;
+  color: gray;
 }
 
 * {
@@ -167,6 +212,12 @@ button {
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url("https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-830-arrow-thin-right-white-27b356aac3227210acca2ae44fcfed8a6c0ca7adde4e867fe9793cae4ebda9d1.svg");
+}
+
+.header_wrapper {
+  background-color: #032541;
+  height: 64px;
+  width: 100%;
 }
 
 header {
@@ -251,7 +302,6 @@ header .header_navs_wrapper .header_hovered_nav_wrapper .hovered_nav_result .res
 }
 
 main {
-  margin: 64px 0 0 0;
   height: 300vh;
   width: 100%;
   display: flex;
