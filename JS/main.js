@@ -3,12 +3,14 @@ var api_key = "d14b1adbe04d8ccc380f0580684188f5";
 var images_url = "https://image.tmdb.org/t/p/original";
 var header = document.getElementsByTagName("header")[0];
 var res_wrapper = document.getElementById("result");
+
 const FILTERS = {
     trending_this_day: "/trending/all/day?",
     trending_this_week: "/trending/all/week?",
     popular_on_tv: "/tv/popular?",
     test: "/tv/68716/screened_theatrically?",
 }
+
 var listFilters = [
     {
         filterName: "В тренде",
