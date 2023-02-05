@@ -7,8 +7,7 @@ var res_wrapper = document.getElementById("result");
 const FILTERS = {
     trending_this_day: "/trending/all/day?",
     trending_this_week: "/trending/all/week?",
-    popular_on_tv: "/tv/popular?",
-    test: "/tv/68716/screened_theatrically?",
+    popular: "movie/popular",
 }
 
 var listFilters = [
@@ -38,6 +37,47 @@ var listFilters = [
             }
         ]
     },
+    {
+        filterName: "Последние трейлеры",
+        filterId: "lates_trailers",
+        filter: [
+            {
+                type: "filter",
+                name: "По ТВ",
+                activation: function(wrapper) {
+                    return fetchAPI(this.api, wrapper);
+                },
+                api: FILTERS.trending_this_day,
+            },
+            {
+                type: "filter",
+                name: "В кинотеатрах",
+                activation: function(wrapper) {
+                    return fetchAPI(this.api, wrapper);
+                },
+                api: FILTERS.trending_this_week,
+            },
+            {
+                type: "indicator",
+                position: "left"
+            }
+        ]
+    },
+];
+
+var months = [
+    "январь",
+    "февраль",
+    "март",
+    "апрель",
+    "май",
+    "июнь",
+    "июль",
+    "авгутс",
+    "сентябрь",
+    "октябрь",
+    "ноябрь",
+    "декабрь",
 ];
 
 showFilters();
@@ -63,13 +103,13 @@ function scrollingEffect() {
 async function fetchAPI(url, results_wrapper, page = 1) {
     await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU&page=${page}`)
     .then(result => result.json())
-    .then(obj => showMovie(obj.results, results_wrapper))
+    .then(obj => showMovie(obj.results, results_wrapper));
 }
 
 async function logAPI(url) {
     await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU`)
     .then(result => result.json())
-    .then(obj => console.log(obj.results));
+    // .then(obj => console.log(obj.results));
 }
 
 logAPI(FILTERS.test);
@@ -117,35 +157,55 @@ function showFilters() {
     })
 }
 
+function showDateOfMovie(date) {
+    var year = date.slice(0, 4);
+    var month = +(date.slice(5, 7));
+    month = months[month - 1].slice(0, 3);
+    var day = (date.slice(8, 10));
+    return `${day} ${month} ${year}`
+}
 
-function showMovie(arr, results_wrapper) {
+function getPercentColor(percent) {
+    if (percent >= 70) {
+        return "#21d07a";
+    } else if (percent <= 30) {
+        return "#db2360";
+    } else if (percent < 70) {
+        return "#d2d531";
+    }
+}
+
+function showMovie(arr, results_wrapper, type) {
     let res = document.getElementById(results_wrapper).nextElementSibling;
     res.innerHTML = "";
 
     arr.forEach(movie => {
+        console.log(movie);
         res.innerHTML += `
         <div class="card_wrapper">
-            <img class="card_img" src="${images_url}/${movie.poster_path}">
+            <a href="${movie}" class="img_wrapper">
+                <img class="card_img" src="${images_url}/${movie.poster_path}">
+            </a>
             <div class="about_card_wrapper">
                 <div class="popularity_wrapper">
                     <div class="popularity">
                         <svg viewBox="0 0 36 36" class="circular-chart">
-                            <path class="circle" stroke-dasharray="${+((movie.vote_average.toFixed(1)).split(".").join(""))}, 100"
+                            <path class="circle" stroke-dasharray="${+((movie.vote_average.toFixed(1)).split(".").join(""))}, 100" style="stroke: ${getPercentColor(+((movie.vote_average.toFixed(1)).split(".").join("")))};"
                                 d="M18 2.0845
                                   a 15.9155 15.9155 0 0 1 0 31.831
                                   a 15.9155 15.9155 0 0 1 0 -31.831"
                             />
-                            </svg>
-                            <div class="popularity_percent">
-                                ${+((movie.vote_average.toFixed(1)).split(".").join(""))}
-                            </div>
+                        </svg>
+                        <div class="popularity_percent">
+                            ${+((movie.vote_average.toFixed(1)).split(".").join(""))}
+                        </div>
                     </div>
                 </div>
                 <div class="card_title">
                     ${movie.title ?? movie.name}
                 </div>
                 <div class="card_date">
-                    ${movie.release_date ?? movie.first_air_date}
+                    ${showDateOfMovie(movie.release_date ?? movie.first_air_date)}
                 </div>
             </div>
         </div>

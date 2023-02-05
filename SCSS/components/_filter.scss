@@ -1,21 +1,21 @@
 .films_list_wrapper {
     display: flex;
     flex-direction: column;
-    gap: 20px;
     padding: 40px 0 0 0;
     width: 100%;
     height: fit-content;
     background-image: url(https://www.themoviedb.org/assets/2/v4/misc/trending-bg-39afc2a5f77e31d469b25c187814c0a2efef225494c038098d62317d923f8415.svg);
     background-repeat: no-repeat;
-    background-position: 50% 200px;
+    background-position: 50% 220px;
     background-size: 100%;
     .list_head_wrapper {
         display: flex;
         flex-direction: row;
         align-items: center;
         gap: 20px;
+        padding-left: 40px;
         .list_title {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 600;
         }
         .list_filter_wrapper {
@@ -73,13 +73,13 @@
         gap: 20px;
         width: 100%;
         overflow-x: auto;
-        padding: 40px;
+        padding: 20px 40px;
         .card_wrapper {
             width: 150px;
             min-width: 150px;
-            background-color: transparent;
             display: flex;
             flex-direction: column;
+            position: relative;
             .card_img {
                 min-height: calc(150px * 1.5);
                 border-radius: 8px;
@@ -90,7 +90,7 @@
                 position: relative;
                 display: flex;
                 flex-direction: column;
-                gap: 4px;
+                gap: 0;
                 padding: 24px 8px 8px 8px;
                 .popularity_wrapper {
                     position: absolute;
@@ -114,7 +114,6 @@
                         height: 100%;
                         .circular-chart {
                             position: absolute;
-                            z-index: 2;
                             display: block;
                             height: 100%;
                             width: 100%;
@@ -124,7 +123,6 @@
                                 left: 0;
                                 height: 100%;
                                 width: 100%;
-                                stroke: #4CC790;
                                 fill: none;
                                 stroke-width: 2px;
                                 stroke-linecap: round;
