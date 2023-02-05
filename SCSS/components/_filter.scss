@@ -6,7 +6,7 @@
     height: fit-content;
     background-image: url(https://www.themoviedb.org/assets/2/v4/misc/trending-bg-39afc2a5f77e31d469b25c187814c0a2efef225494c038098d62317d923f8415.svg);
     background-repeat: no-repeat;
-    background-position: 50% 220px;
+    background-position: 50% 205px;
     background-size: 100%;
     .list_head_wrapper {
         display: flex;
@@ -105,8 +105,6 @@
                     left: 10px;
                     background-color: $dark-gray;
                     color: white;
-                    -webkit-background-clip: border;
-                    background-clip: border;
                     outline: 1px solid $dark-gray;
                     .popularity {
                         position: relative;

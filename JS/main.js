@@ -7,7 +7,7 @@ var res_wrapper = document.getElementById("result");
 const FILTERS = {
     trending_this_day: "/trending/all/day?",
     trending_this_week: "/trending/all/week?",
-    popular: "movie/popular",
+    popular: "/movie/popular?",
 }
 
 var listFilters = [
@@ -109,10 +109,8 @@ async function fetchAPI(url, results_wrapper, page = 1) {
 async function logAPI(url) {
     await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU`)
     .then(result => result.json())
-    // .then(obj => console.log(obj.results));
+    .then(obj => console.log(obj.results));
 }
-
-logAPI(FILTERS.test);
 
 function activateFilter(filterName, position) {
     var item = document.querySelector(`#${filterName} > .list_filter_wrapper`);
@@ -175,12 +173,14 @@ function getPercentColor(percent) {
     }
 }
 
+logAPI("/movie/popular?");
+logAPI("/tv/popular?");
+
 function showMovie(arr, results_wrapper, type) {
     let res = document.getElementById(results_wrapper).nextElementSibling;
     res.innerHTML = "";
 
     arr.forEach(movie => {
-        console.log(movie);
         res.innerHTML += `
         <div class="card_wrapper">
             <a href="${movie}" class="img_wrapper">

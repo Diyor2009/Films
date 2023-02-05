@@ -14,7 +14,7 @@
   height: fit-content;
   background-image: url(https://www.themoviedb.org/assets/2/v4/misc/trending-bg-39afc2a5f77e31d469b25c187814c0a2efef225494c038098d62317d923f8415.svg);
   background-repeat: no-repeat;
-  background-position: 50% 220px;
+  background-position: 50% 205px;
   background-size: 100%;
 }
 .films_list_wrapper .list_head_wrapper {
@@ -121,8 +121,6 @@
   left: 10px;
   background-color: #081c22;
   color: white;
-  -webkit-background-clip: border;
-  background-clip: border;
   outline: 1px solid #081c22;
 }
 .films_list_wrapper .films_list .card_wrapper .about_card_wrapper .popularity_wrapper .popularity {
