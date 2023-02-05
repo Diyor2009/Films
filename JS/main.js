@@ -3,13 +3,12 @@ var api_key = "d14b1adbe04d8ccc380f0580684188f5";
 var images_url = "https://image.tmdb.org/t/p/original";
 var header = document.getElementsByTagName("header")[0];
 var res_wrapper = document.getElementById("result");
-
 const FILTERS = {
     trending_this_day: "/trending/all/day?",
     trending_this_week: "/trending/all/week?",
-    latest_trailers: "",
+    popular_on_tv: "/tv/popular?",
+    test: "/tv/68716/screened_theatrically?",
 }
-
 var listFilters = [
     {
         filterName: "В тренде",
@@ -65,6 +64,14 @@ async function fetchAPI(url, results_wrapper, page = 1) {
     .then(obj => showMovie(obj.results, results_wrapper))
 }
 
+async function logAPI(url) {
+    await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU`)
+    .then(result => result.json())
+    .then(obj => console.log(obj.results));
+}
+
+logAPI(FILTERS.test);
+
 function activateFilter(filterName, position) {
     var item = document.querySelector(`#${filterName} > .list_filter_wrapper`);
     var leftFilter = item.firstElementChild;
@@ -109,13 +116,11 @@ function showFilters() {
 }
 
 
-
 function showMovie(arr, results_wrapper) {
     let res = document.getElementById(results_wrapper).nextElementSibling;
     res.innerHTML = "";
 
     arr.forEach(movie => {
-        console.log(movie);
         res.innerHTML += `
         <div class="card_wrapper">
             <img class="card_img" src="${images_url}/${movie.poster_path}">
