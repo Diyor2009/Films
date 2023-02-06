@@ -2,12 +2,15 @@ var main_api_url = "https://api.themoviedb.org/3";
 var api_key = "d14b1adbe04d8ccc380f0580684188f5";
 var images_url = "https://image.tmdb.org/t/p/original";
 var header = document.getElementsByTagName("header")[0];
-var res_wrapper = document.getElementById("result");
+var img = document.getElementById("img");
+
+// img.setAttribute("src", "https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,00192f,00baff)/hPea3Qy5Gd6z4kJLUruBbwAH8Rm.jpg")
 
 const FILTERS = {
     trending_this_day: "/trending/all/day?",
     trending_this_week: "/trending/all/week?",
-    popular: "/movie/popular?",
+    popular_movies: "/movie/popular?",
+    popular_tv: "/tv/popular?",
 }
 
 var listFilters = [
@@ -38,8 +41,8 @@ var listFilters = [
         ]
     },
     {
-        filterName: "Последние трейлеры",
-        filterId: "lates_trailers",
+        filterName: "Что популярно",
+        filterId: "popular",
         filter: [
             {
                 type: "filter",
@@ -47,7 +50,7 @@ var listFilters = [
                 activation: function(wrapper) {
                     return fetchAPI(this.api, wrapper);
                 },
-                api: FILTERS.trending_this_day,
+                api: FILTERS.popular_tv,
             },
             {
                 type: "filter",
@@ -55,7 +58,7 @@ var listFilters = [
                 activation: function(wrapper) {
                     return fetchAPI(this.api, wrapper);
                 },
-                api: FILTERS.trending_this_week,
+                api: FILTERS.popular_movies,
             },
             {
                 type: "indicator",
@@ -79,8 +82,6 @@ var months = [
     "ноябрь",
     "декабрь",
 ];
-
-showFilters();
 
 var windowPosition = window.pageYOffset;
 window.addEventListener('scroll', scrollingEffect);
@@ -106,35 +107,42 @@ async function fetchAPI(url, results_wrapper, page = 1) {
     .then(obj => showMovie(obj.results, results_wrapper));
 }
 
-async function logAPI(url) {
-    await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU`)
+async function logAPI(url, more = "") {
+    await fetch(`${url}api_key=${api_key}&language=ru-RU${more}`)
     .then(result => result.json())
-    .then(obj => console.log(obj.results));
+    .then(obj => console.log(obj.results ?? obj));
 }
 
-function activateFilter(filterName, position) {
+// logAPI("/tv/popular?");
+// logAPI("/movie/popular?");
+
+function activateFilter(filterName, position, filter_position) {
     var item = document.querySelector(`#${filterName} > .list_filter_wrapper`);
     var leftFilter = item.firstElementChild;
     var rightFilter = leftFilter.nextSibling.nextElementSibling;
     var indicator = rightFilter.nextElementSibling;
     leftFilter.classList.remove("active_filter");
     rightFilter.classList.remove("active_filter");
-    if (position == "left" || leftFilter.className.includes("active_filter") || indicator.className.includes("indicator_on_left")) {
-        indicator.classList.remove("indicator_on_right");
-        rightFilter.classList.remove("active_filter");
-        leftFilter.classList.add("active_filter");
-        indicator.style.left = "0";
-        indicator.style.width = `${leftFilter.offsetWidth}px`;
-        listFilters[0].filter[0].activation(filterName);
-    }
-    if (position == "right" || rightFilter.className.includes("active_filter") || indicator.className.includes("indicator_on_right")) {
-        listFilters[0].filter[1].activation(filterName);
-        indicator.classList.remove("indicator_on_left");
-        leftFilter.classList.remove("active_filter");
-        rightFilter.classList.add("active_filter");
-        indicator.style.left = `${leftFilter.offsetWidth}px`;
-        indicator.style.width = `${rightFilter.offsetWidth}px`;
-    }
+    listFilters.forEach(filter => {
+        if (filter.filterId === filterName) {
+            if (position == "left" || leftFilter.className.includes("active_filter") || indicator.className.includes("indicator_on_left")) {
+                filter.filter[0].activation(filterName);
+                indicator.classList.remove("indicator_on_right");
+                rightFilter.classList.remove("active_filter");
+                leftFilter.classList.add("active_filter");
+                indicator.style.left = "0";
+                indicator.style.width = `${leftFilter.offsetWidth}px`;
+            };
+            if (position == "right" || rightFilter.className.includes("active_filter") || indicator.className.includes("indicator_on_right")) {
+                filter.filter[1].activation(filterName);
+                indicator.classList.remove("indicator_on_left");
+                leftFilter.classList.remove("active_filter");
+                rightFilter.classList.add("active_filter");
+                indicator.style.left = `${leftFilter.offsetWidth}px`;
+                indicator.style.width = `${rightFilter.offsetWidth}px`;
+            };
+        };
+    });
 }
 
 function showFilters() {
@@ -146,7 +154,7 @@ function showFilters() {
                 <span class="list_title">${filter.filterName}</span>
                 <div class="list_filter_wrapper">
                     <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \`left\`)">${filter.filter[0].name}</span>
-                    <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \'right\')">${filter.filter[1].name}</span>
+                    <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \`right\`)">${filter.filter[1].name}</span>
                     <span class="indicator indicator_on_${filter.filter[2].position}"></span>
                 </div>
             `;
@@ -160,8 +168,8 @@ function showDateOfMovie(date) {
     var month = +(date.slice(5, 7));
     month = months[month - 1].slice(0, 3);
     var day = (date.slice(8, 10));
-    return `${day} ${month} ${year}`
-}
+    return `${day} ${month} ${year}`;
+};
 
 function getPercentColor(percent) {
     if (percent >= 70) {
@@ -170,20 +178,25 @@ function getPercentColor(percent) {
         return "#db2360";
     } else if (percent < 70) {
         return "#d2d531";
-    }
-}
+    };
+};
 
-logAPI("/movie/popular?");
-logAPI("/tv/popular?");
+function getMovieLink(movie_id, movie_name) {
+    var full_link = "";
+    full_link = `/${movie_id}-${`${movie_name.split(":").join(" ").split(".").join(" ").split(" ").join("-")}`.toLowerCase()}`
+    return full_link;
+}
 
 function showMovie(arr, results_wrapper, type) {
     let res = document.getElementById(results_wrapper).nextElementSibling;
     res.innerHTML = "";
 
     arr.forEach(movie => {
+        var movie_link = `https://www.themoviedb.org/movie${getMovieLink(movie.id, (movie.title ?? movie.name ?? movie.original_title ?? movie.original_name))}`
+        console.log(`${movie_link}`);
         res.innerHTML += `
         <div class="card_wrapper">
-            <a href="${movie}" class="img_wrapper">
+            <a href="${movie_link}" class="img_wrapper">
                 <img class="card_img" src="${images_url}/${movie.poster_path}">
             </a>
             <div class="about_card_wrapper">
@@ -212,3 +225,5 @@ function showMovie(arr, results_wrapper, type) {
         `;
     });
 };
+
+showFilters();
