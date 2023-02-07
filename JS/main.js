@@ -9,8 +9,8 @@ var img = document.getElementById("img");
 const FILTERS = {
     trending_this_day: "/trending/all/day?",
     trending_this_week: "/trending/all/week?",
-    popular_movies: "/movie/popular?",
-    popular_tv: "/tv/popular?",
+    popular_on_theatres: "/movie/popular?",
+    popular_on_tv: "/tv/popular?",
 }
 
 var listFilters = [
@@ -21,6 +21,7 @@ var listFilters = [
             {
                 type: "filter",
                 name: "Сегодня",
+                type: "all",
                 activation: function(wrapper) {
                     return fetchAPI(this.api, wrapper);
                 },
@@ -29,6 +30,7 @@ var listFilters = [
             {
                 type: "filter",
                 name: "На этой неделе",
+                type: "all",
                 activation: function(wrapper) {
                     return fetchAPI(this.api, wrapper);
                 },
@@ -47,18 +49,20 @@ var listFilters = [
             {
                 type: "filter",
                 name: "По ТВ",
+                type: "tv",
                 activation: function(wrapper) {
                     return fetchAPI(this.api, wrapper);
                 },
-                api: FILTERS.popular_tv,
+                api: FILTERS.popular_on_tv,
             },
             {
                 type: "filter",
                 name: "В кинотеатрах",
+                type: "movie",
                 activation: function(wrapper) {
                     return fetchAPI(this.api, wrapper);
                 },
-                api: FILTERS.popular_movies,
+                api: FILTERS.popular_on_theatres,
             },
             {
                 type: "indicator",
@@ -115,6 +119,7 @@ async function logAPI(url, more = "") {
 
 // logAPI("/tv/popular?");
 // logAPI("/movie/popular?");
+logAPI(`https://api.themoviedb.org/3/search/company?api_key=${api_key}&page=1`);
 
 function activateFilter(filterName, position, filter_position) {
     var item = document.querySelector(`#${filterName} > .list_filter_wrapper`);
@@ -143,7 +148,7 @@ function activateFilter(filterName, position, filter_position) {
             };
         };
     });
-}
+};
 
 function showFilters() {
     listFilters.forEach(filter => {
@@ -185,15 +190,14 @@ function getMovieLink(movie_id, movie_name) {
     var full_link = "";
     full_link = `/${movie_id}-${`${movie_name.split(":").join(" ").split(".").join(" ").split(" ").join("-")}`.toLowerCase()}`
     return full_link;
-}
+};
 
 function showMovie(arr, results_wrapper, type) {
     let res = document.getElementById(results_wrapper).nextElementSibling;
     res.innerHTML = "";
-
+    
     arr.forEach(movie => {
-        var movie_link = `https://www.themoviedb.org/movie${getMovieLink(movie.id, (movie.title ?? movie.name ?? movie.original_title ?? movie.original_name))}`
-        console.log(`${movie_link}`);
+        var movie_link = `https://www.themoviedb.org/movie${getMovieLink(movie.id, (movie.original_title ?? movie.original_name))}`
         res.innerHTML += `
         <div class="card_wrapper">
             <a href="${movie_link}" class="img_wrapper">
