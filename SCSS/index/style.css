@@ -9,7 +9,6 @@
   flex-direction: column;
   padding: 40px 0 0 0;
   width: 100%;
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   background-image: url(https://www.themoviedb.org/assets/2/v4/misc/trending-bg-39afc2a5f77e31d469b25c187814c0a2efef225494c038098d62317d923f8415.svg);
@@ -32,10 +31,8 @@
   display: flex;
   flex-direction: row;
   gap: 0;
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   border-radius: 30px;
@@ -237,7 +234,6 @@ header .header_navs_wrapper {
   flex-direction: row;
   align-items: center;
   gap: 14px;
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
@@ -308,7 +304,6 @@ main .main_head_images_wrapper {
   flex-direction: column;
   gap: 0;
   widows: 100%;
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
 }
@@ -331,20 +326,17 @@ main .main_head_images_wrapper .main_head_wrapper .main_head {
 }
 main .main_head_images_wrapper .main_head_wrapper .main_head .main_search_wrapper {
   width: 100%;
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
 }
 main .main_head_images_wrapper .main_head_wrapper .main_head .main_search_wrapper .search_input_wrapper {
   width: 100%;
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   position: relative;
 }
 main .main_head_images_wrapper .main_head_wrapper .main_head .main_search_wrapper .search_input_wrapper .search_input {
   width: 100%;
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   padding: 10px 20px;
@@ -358,7 +350,6 @@ main .main_head_images_wrapper .main_head_wrapper .main_head .main_search_wrappe
   position: absolute;
   right: 0;
   bottom: 0;
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   height: 100%;
@@ -428,4 +419,12 @@ main .main_films_wrapper {
   height: 100vh;
   padding: 0 90px;
   font-family: "Source Sans Pro", Arial, sans-serif;
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  background-color: #032541;
+  height: 321px;
 }/*# sourceMappingURL=style.css.map */

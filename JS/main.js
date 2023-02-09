@@ -1,8 +1,7 @@
 var main_api_url = "https://api.themoviedb.org/3";
 var api_key = "d14b1adbe04d8ccc380f0580684188f5";
 var images_url = "https://image.tmdb.org/t/p/original";
-var header = document.getElementsByTagName("header")[0];
-var img = document.getElementById("img");
+// import {header, img} from "./html_varaibles.js";
 
 // img.setAttribute("src", "https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,00192f,00baff)/hPea3Qy5Gd6z4kJLUruBbwAH8Rm.jpg")
 
@@ -21,18 +20,18 @@ var listFilters = [
             {
                 type: "filter",
                 name: "Сегодня",
-                type: "all",
+                filter_media_type: "all",
                 activation: function(wrapper) {
-                    return fetchAPI(this.api, wrapper);
+                    return fetchAPI(this.api, wrapper, this.filter_media_type);
                 },
                 api: FILTERS.trending_this_day,
             },
             {
                 type: "filter",
                 name: "На этой неделе",
-                type: "all",
+                filter_media_type: "all",
                 activation: function(wrapper) {
-                    return fetchAPI(this.api, wrapper);
+                    return fetchAPI(this.api, wrapper, this.filter_media_type);
                 },
                 api: FILTERS.trending_this_week,
             },
@@ -49,18 +48,18 @@ var listFilters = [
             {
                 type: "filter",
                 name: "По ТВ",
-                type: "tv",
+                filter_media_type: "tv",
                 activation: function(wrapper) {
-                    return fetchAPI(this.api, wrapper);
+                    return fetchAPI(this.api, wrapper, this.filter_media_type);
                 },
                 api: FILTERS.popular_on_tv,
             },
             {
                 type: "filter",
                 name: "В кинотеатрах",
-                type: "movie",
+                filter_media_type: "movie",
                 activation: function(wrapper) {
-                    return fetchAPI(this.api, wrapper);
+                    return fetchAPI(this.api, wrapper, this.filter_media_type);
                 },
                 api: FILTERS.popular_on_theatres,
             },
@@ -105,10 +104,10 @@ function scrollingEffect() {
     windowPosition = scrollPosition;
 };
 
-async function fetchAPI(url, results_wrapper, page = 1) {
+async function fetchAPI(url, results_wrapper, type, page = 1) {
     await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU&page=${page}`)
     .then(result => result.json())
-    .then(obj => showMovie(obj.results, results_wrapper));
+    .then(obj => showMovie(obj.results, results_wrapper, type));
 }
 
 async function logAPI(url, more = "") {
@@ -119,9 +118,9 @@ async function logAPI(url, more = "") {
 
 // logAPI("/tv/popular?");
 // logAPI("/movie/popular?");
-logAPI(`https://api.themoviedb.org/3/search/company?api_key=${api_key}&page=1`);
+// logAPI(`https://api.themoviedb.org/3/search/company?api_key=${api_key}&page=1`);
 
-function activateFilter(filterName, position, filter_position) {
+function activateFilter(filterName, position) {
     var item = document.querySelector(`#${filterName} > .list_filter_wrapper`);
     var leftFilter = item.firstElementChild;
     var rightFilter = leftFilter.nextSibling.nextElementSibling;
@@ -164,9 +163,9 @@ function showFilters() {
                 </div>
             `;
             activateFilter(filter.filterId);
-        }
-    })
-}
+        };
+    });
+};
 
 function showDateOfMovie(date) {
     var year = date.slice(0, 4);
@@ -197,7 +196,7 @@ function showMovie(arr, results_wrapper, type) {
     res.innerHTML = "";
     
     arr.forEach(movie => {
-        var movie_link = `https://www.themoviedb.org/movie${getMovieLink(movie.id, (movie.original_title ?? movie.original_name))}`
+        var movie_link = `https://www.themoviedb.org/${type}${getMovieLink(movie.id, (movie.original_title ?? movie.original_name))}`
         res.innerHTML += `
         <div class="card_wrapper">
             <a href="${movie_link}" class="img_wrapper">
