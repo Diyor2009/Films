@@ -108,13 +108,13 @@ async function fetchAPI(url, results_wrapper, type, page = 1) {
     await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU&page=${page}`)
     .then(result => result.json())
     .then(obj => showMovie(obj.results, results_wrapper, type));
-}
+};
 
 async function logAPI(url, more = "") {
     await fetch(`${url}api_key=${api_key}&language=ru-RU${more}`)
     .then(result => result.json())
     .then(obj => console.log(obj.results ?? obj));
-}
+};
 
 // logAPI("/tv/popular?");
 // logAPI("/movie/popular?");

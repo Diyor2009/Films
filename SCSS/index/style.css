@@ -303,7 +303,7 @@ main .main_head_images_wrapper {
   display: flex;
   flex-direction: column;
   gap: 0;
-  widows: 100%;
+  width: 100%;
   height: -moz-fit-content;
   height: fit-content;
 }
@@ -427,4 +427,5 @@ footer {
   gap: 20px;
   background-color: #032541;
   height: 321px;
+  color: white;
 }/*# sourceMappingURL=style.css.map */
