@@ -1,6 +1,8 @@
 var main_api_url = "https://api.themoviedb.org/3";
 var api_key = "d14b1adbe04d8ccc380f0580684188f5";
 var images_url = "https://image.tmdb.org/t/p/original";
+var header = document.getElementsByTagName("header")[0];
+var img = document.getElementById("img");
 // import {header, img} from "./html_varaibles.js";
 
 // img.setAttribute("src", "https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,00192f,00baff)/hPea3Qy5Gd6z4kJLUruBbwAH8Rm.jpg")
@@ -90,7 +92,6 @@ var windowPosition = window.pageYOffset;
 window.addEventListener('scroll', scrollingEffect);
 function scrollingEffect() {
     let scrollPosition = window.pageYOffset;
-
     if (scrollPosition > windowPosition) {
         header.classList.remove("showed_header");
         header.classList.add("closed_header");
@@ -100,7 +101,6 @@ function scrollingEffect() {
         header.classList.remove("closed_header");
         header.classList.add("showed_header");
     };
-
     windowPosition = scrollPosition;
 };
 
