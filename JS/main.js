@@ -1,3 +1,4 @@
+var filmsListWrapper = document.getElementsByClassName("films_list");
 var main_api_url = "https://api.themoviedb.org/3";
 var api_key = "d14b1adbe04d8ccc380f0580684188f5";
 var images_url = "https://image.tmdb.org/t/p/original";
@@ -22,7 +23,7 @@ var listFilters = [
             {
                 type: "filter",
                 name: "Сегодня",
-                filter_media_type: "all",
+                filter_media_type: "movie",
                 activation: function(wrapper) {
                     return fetchAPI(this.api, wrapper, this.filter_media_type);
                 },
@@ -111,10 +112,12 @@ async function fetchAPI(url, results_wrapper, type, page = 1) {
 };
 
 async function logAPI(url, more = "") {
-    await fetch(`${url}api_key=${api_key}&language=ru-RU${more}`)
+    await fetch(`https://api.themoviedb.org/3${url}api_key=${api_key}`)
     .then(result => result.json())
-    .then(obj => console.log(obj.results ?? obj));
+    .then(obj => console.log(obj));
 };
+
+logAPI("/configuration?")
 
 // logAPI("/tv/popular?");
 // logAPI("/movie/popular?");
@@ -134,16 +137,20 @@ function activateFilter(filterName, position) {
                 indicator.classList.remove("indicator_on_right");
                 rightFilter.classList.remove("active_filter");
                 leftFilter.classList.add("active_filter");
-                indicator.style.left = "0";
-                indicator.style.width = `${leftFilter.offsetWidth}px`;
+                setTimeout(() => {
+                    indicator.style.left = "0";
+                    indicator.style.width = `${leftFilter.offsetWidth}px`;
+                }, 0)
             };
             if (position == "right" || rightFilter.className.includes("active_filter") || indicator.className.includes("indicator_on_right")) {
                 filter.filter[1].activation(filterName);
                 indicator.classList.remove("indicator_on_left");
                 leftFilter.classList.remove("active_filter");
                 rightFilter.classList.add("active_filter");
-                indicator.style.left = `${leftFilter.offsetWidth}px`;
-                indicator.style.width = `${rightFilter.offsetWidth}px`;
+                setTimeout(() => {
+                    indicator.style.left = `${leftFilter.offsetWidth}px`;
+                    indicator.style.width = `${rightFilter.offsetWidth}px`;
+                }, 0)
             };
         };
     });
@@ -160,6 +167,7 @@ function showFilters() {
                     <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \`left\`)">${filter.filter[0].name}</span>
                     <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \`right\`)">${filter.filter[1].name}</span>
                     <span class="indicator indicator_on_${filter.filter[2].position}"></span>
+                    <span class="list_shadow"></span>
                 </div>
             `;
             activateFilter(filter.filterId);
@@ -186,9 +194,7 @@ function getPercentColor(percent) {
 };
 
 function getMovieLink(movie_id, movie_name) {
-    var full_link = "";
-    full_link = `/${movie_id}-${`${movie_name.split(":").join(" ").split(".").join(" ").split(" ").join("-")}`.toLowerCase()}`
-    return full_link;
+    return `/${movie_id}-${`${movie_name.split(":").join(" ").split(".").join(" ").split(" ").join("-")}`.toLowerCase()}`;
 };
 
 function showMovie(arr, results_wrapper, type) {
@@ -196,7 +202,7 @@ function showMovie(arr, results_wrapper, type) {
     res.innerHTML = "";
     
     arr.forEach(movie => {
-        var movie_link = `https://www.themoviedb.org/${type}${getMovieLink(movie.id, (movie.original_title ?? movie.original_name))}`
+        var movie_link = `https://www.themoviedb.org/${movie.media_type ?? type}${getMovieLink(movie.id, (movie.original_title ?? movie.original_name))}`
         res.innerHTML += `
         <div class="card_wrapper">
             <a href="${movie_link}" class="img_wrapper">
