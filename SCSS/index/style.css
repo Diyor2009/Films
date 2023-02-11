@@ -1,8 +1,6 @@
 @font-face {
   font-family: "Source Sans Pro";
   src: url("../../Fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf");
-  font-weight: lighter;
-  font-style: normal;
 }
 .films_list_wrapper {
   display: flex;
@@ -425,9 +423,62 @@ main .main_films_wrapper {
 
 footer {
   display: flex;
-  flex-direction: row;
-  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
   background-color: #032541;
   height: 321px;
   color: white;
+  padding: 40px 0;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+}
+footer .footer_content_wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 40px;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+footer .footer_brand_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+}
+footer .footer_brand_wrapper .footer_brand_img {
+  width: 130px;
+  height: 130px;
+}
+footer .footer_brand_wrapper .footer_white_btn {
+  background-color: white;
+  border-radius: 6px;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(1, 180, 228);
+}
+footer .footer_links_wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: flex-start;
+}
+footer .footer_links_wrapper .footer_link_item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+footer .footer_links_wrapper .footer_link_item .footer_link_title {
+  font-family: sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+footer .footer_links_wrapper .footer_link_item .footer_link {
+  color: white;
+  font-size: 17px;
 }/*# sourceMappingURL=style.css.map */

@@ -117,12 +117,6 @@ async function logAPI(url, more = "") {
     .then(obj => console.log(obj));
 };
 
-logAPI("/configuration?")
-
-// logAPI("/tv/popular?");
-// logAPI("/movie/popular?");
-// logAPI(`https://api.themoviedb.org/3/search/company?api_key=${api_key}&page=1`);
-
 function activateFilter(filterName, position) {
     var item = document.querySelector(`#${filterName} > .list_filter_wrapper`);
     var leftFilter = item.firstElementChild;
