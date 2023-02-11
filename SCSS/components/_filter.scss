@@ -146,6 +146,10 @@
                 }
                 .card_title {
                     font-weight: 600;
+                    color: black;
+                    &:hover {
+                        color: $light-blue;
+                    }
                 }
                 .card_date {
                     font-weight: 100;

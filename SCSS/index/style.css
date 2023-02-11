@@ -157,6 +157,10 @@
 }
 .films_list_wrapper .films_list .card_wrapper .about_card_wrapper .card_title {
   font-weight: 600;
+  color: black;
+}
+.films_list_wrapper .films_list .card_wrapper .about_card_wrapper .card_title:hover {
+  color: rgb(1, 180, 228);
 }
 .films_list_wrapper .films_list .card_wrapper .about_card_wrapper .card_date {
   font-weight: 100;

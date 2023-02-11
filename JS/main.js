@@ -219,9 +219,9 @@ function showMovie(arr, results_wrapper, type) {
                         </div>
                     </div>
                 </div>
-                <div class="card_title">
+                <a href="${movie_link}" class="card_title">
                     ${movie.title ?? movie.name}
-                </div>
+                </a>
                 <div class="card_date">
                     ${showDateOfMovie(movie.release_date ?? movie.first_air_date)}
                 </div>
