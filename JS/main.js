@@ -111,11 +111,13 @@ async function fetchAPI(url, results_wrapper, type, page = 1) {
     .then(obj => showMovie(obj.results, results_wrapper, type));
 };
 
-async function logAPI(url, more = "") {
-    await fetch(`https://api.themoviedb.org/3${url}api_key=${api_key}`)
+async function logAPI(url) {
+    await fetch(`https://api.themoviedb.org${url}api_key=${api_key}`)
     .then(result => result.json())
     .then(obj => console.log(obj));
 };
+
+logAPI("/person/latest?")
 
 function activateFilter(filterName, position) {
     var item = document.querySelector(`#${filterName} > .list_filter_wrapper`);
