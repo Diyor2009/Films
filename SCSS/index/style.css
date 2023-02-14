@@ -3,6 +3,58 @@
   font-family: "Source Sans Pro";
   src: url("../../Fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf");
 }
+.popularity_wrapper {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  top: -20px;
+  left: 10px;
+  background-color: #081c22;
+  color: white;
+  outline: 1px solid #081c22;
+}
+.popularity_wrapper .popularity {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.popularity_wrapper .popularity .circular-chart {
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.popularity_wrapper .popularity .circular-chart .circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  fill: none;
+  stroke-width: 2px;
+  stroke-linecap: round;
+}
+.popularity_wrapper .popularity .popularity_percent {
+  font-size: 14px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popularity_wrapper .popularity .popularity_percent::after {
+  content: "%";
+  position: relative;
+  left: 1px;
+  top: -2px;
+  font-size: 6px;
+}
+
 .films_list_wrapper {
   display: flex;
   flex-direction: column;
@@ -109,52 +161,11 @@
   position: absolute;
   width: 35px;
   height: 35px;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   top: -20px;
   left: 10px;
   background-color: #081c22;
   color: white;
   outline: 1px solid #081c22;
-}
-.films_list_wrapper .films_list .card_wrapper .about_card_wrapper .popularity_wrapper .popularity {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.films_list_wrapper .films_list .card_wrapper .about_card_wrapper .popularity_wrapper .popularity .circular-chart {
-  position: absolute;
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-.films_list_wrapper .films_list .card_wrapper .about_card_wrapper .popularity_wrapper .popularity .circular-chart .circle {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  fill: none;
-  stroke-width: 2px;
-  stroke-linecap: round;
-}
-.films_list_wrapper .films_list .card_wrapper .about_card_wrapper .popularity_wrapper .popularity .popularity_percent {
-  font-size: 14px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.films_list_wrapper .films_list .card_wrapper .about_card_wrapper .popularity_wrapper .popularity .popularity_percent::after {
-  content: "%";
-  position: relative;
-  left: 1px;
-  top: -2px;
-  font-size: 6px;
 }
 .films_list_wrapper .films_list .card_wrapper .about_card_wrapper .card_title {
   font-weight: 600;
@@ -525,7 +536,7 @@ nav .nav_items_wrapper .nav_item {
   gap: 10px;
   position: relative;
 }
-nav .nav_items_wrapper .nav_item .hovered_nav_result {
+nav .nav_items_wrapper .nav_item .nav_item_name + .hovered_nav_result {
   top: calc(100% - 6px);
 }
 nav .nav_items_wrapper .nav_item .nav_item_name::before {
@@ -599,7 +610,7 @@ nav .nav_items_wrapper .active_item .nav_item_name::before {
 .movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   width: -moz-fit-content;
   width: fit-content;
   height: -moz-fit-content;
@@ -645,7 +656,7 @@ nav .nav_items_wrapper .active_item .nav_item_name::before {
 }
 .movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper .title_info_wrapper .title_release_date {
   font-weight: 500;
-  font-size: 17px;
+  font-size: 15px;
   font-family: "Source Sans Pro", Arial;
 }
 .movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper .title_info_wrapper .title_genres {
@@ -658,6 +669,7 @@ nav .nav_items_wrapper .active_item .nav_item_name::before {
   height: -moz-fit-content;
   height: fit-content;
   gap: 10px;
+  font-size: 15px;
 }
 .movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper .title_info_wrapper .title_genres::before {
   margin-top: 4px;
@@ -673,8 +685,17 @@ nav .nav_items_wrapper .active_item .nav_item_name::before {
   height: -moz-fit-content;
   height: fit-content;
   gap: 10px;
+  font-size: 15px;
 }
 .movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper .title_info_wrapper .title_time::before {
   margin-top: 4px;
   content: "•";
+}
+.movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_content_info_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  height: 300px;
 }/*# sourceMappingURL=style.css.map */

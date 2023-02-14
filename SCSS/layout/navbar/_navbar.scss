@@ -22,10 +22,10 @@ nav {
             width: fit-content;
             gap: 10px;
             position: relative;
-            .hovered_nav_result {
-                top: calc(100% - 6px);
-            }
             .nav_item_name {
+                & + .hovered_nav_result {
+                    top: calc(100% - 6px);
+                }
                 &::before {
                     content: '';
                     position: absolute;
