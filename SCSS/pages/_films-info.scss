@@ -1,4 +1,5 @@
 .movie_content_wrapper {
+    padding: 0;
     .movie_content_head_wrapper {
         height: calc(100vh - 110px);
         width: 100%;
@@ -28,18 +29,72 @@
             }
             .movie_title_wrapper {
                 display: flex;
-                flex-direction: row;
-                align-items: center;
-                gap: 10px;
-                height: fit-content;
+                flex-direction: column;
+                gap: 6px;
                 width: fit-content;
+                height: fit-content;
                 .movie_title {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    width: fit-content;
+                    height: fit-content;
+                    gap: 10px;
                     font-weight: 600;
                     font-size: 32px;
+                    .movie_release_year {
+                        font-weight: 300;
+                        font-size: 30px;
+                        opacity: 0.8;
+                    }
                 }
-                .movie_release_year {
-                    font-size: 30px;
-                    opacity: 0.8;
+                .title_info_wrapper {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 10px;
+                    align-items: center;
+                    width: fit-content;
+                    height: fit-content;
+                    .version_btn {
+                        width: fit-content;
+                        height: fit-content;
+                        font-size: 14px;
+                        color: $gray;
+                        border: 1px solid $gray;
+                        padding: 2px 4px;
+                        border-radius: 4px;
+                    }
+                    .title_release_date {
+                        font-weight: 500;
+                        font-size: 17px;
+                        font-family: 'Source Sans Pro', Arial;
+                    }
+                    .title_genres {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        width: fit-content;
+                        height: fit-content;
+                        gap: 10px;
+                        &::before {
+                            margin-top: 4px;
+                            content: '\2022';
+                        }
+                    }
+                    .title_time {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        width: fit-content;
+                        height: fit-content;
+                        gap: 10px;
+                        &::before {
+                            margin-top: 4px;
+                            content: '\2022';
+                        }
+                    }
                 }
             }
         }

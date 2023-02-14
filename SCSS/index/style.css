@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "Source Sans Pro";
   src: url("../../Fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf");
@@ -561,6 +562,9 @@ nav .nav_items_wrapper .active_item .nav_item_name::before {
   background-color: rgb(1, 180, 228);
 }
 
+.movie_content_wrapper {
+  padding: 0;
+}
 .movie_content_wrapper .movie_content_head_wrapper {
   height: calc(100vh - 110px);
   width: 100%;
@@ -594,19 +598,83 @@ nav .nav_items_wrapper .active_item .nav_item_name::before {
 }
 .movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  height: -moz-fit-content;
-  height: fit-content;
+  flex-direction: column;
+  gap: 6px;
   width: -moz-fit-content;
   width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 .movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper .movie_title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  gap: 10px;
   font-weight: 600;
   font-size: 32px;
 }
-.movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper .movie_release_year {
+.movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper .movie_title .movie_release_year {
+  font-weight: 300;
   font-size: 30px;
   opacity: 0.8;
+}
+.movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper .title_info_wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper .title_info_wrapper .version_btn {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+.movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper .title_info_wrapper .title_release_date {
+  font-weight: 500;
+  font-size: 17px;
+  font-family: "Source Sans Pro", Arial;
+}
+.movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper .title_info_wrapper .title_genres {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  gap: 10px;
+}
+.movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper .title_info_wrapper .title_genres::before {
+  margin-top: 4px;
+  content: "•";
+}
+.movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper .title_info_wrapper .title_time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  gap: 10px;
+}
+.movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_title_wrapper .title_info_wrapper .title_time::before {
+  margin-top: 4px;
+  content: "•";
 }/*# sourceMappingURL=style.css.map */
