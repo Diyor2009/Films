@@ -4,8 +4,128 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../SCSS/index/style.css">
     <title></title>
 </head>
 <body>
+    <div class="header_wrapper">
+        <header>
+            <div class="header_navs_wrapper">
+                <a href="./index.html" class="header_nav header_brand">
+                    <img src="../Images/site_logo_1.svg" class="header_brand">
+                </a>
+                <div class="header_hovered_nav_wrapper">
+                    <a href="#" class="header_nav hovered_nav">
+                        Фильмы
+                    </a>
+                    <div class="hovered_nav_result">
+                        <ul class="result_list">
+                            <a href="https://www.themoviedb.org/movie" class="result_link">
+                                Популярные
+                            </a>
+                            <a href="https://www.themoviedb.org/movie/now-playing" class="result_link">
+                                Смотрят сейчас
+                            </a>
+                            <a href="https://www.themoviedb.org/movie/upcoming" class="result_link">
+                                Ожидаемые
+                            </a>
+                            <a href="https://www.themoviedb.org/movie/top-rated" class="result_link">
+                                Лучшие
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header_hovered_nav_wrapper">
+                    <a href="#" class="header_nav hovered_nav">
+                        Сериалы
+                    </a>
+                    <div class="hovered_nav_result">
+                        <ul class="result_list">
+                            <a href="https://www.themoviedb.org/tv" class="result_link">
+                                Популярные
+                            </a>
+                            <a href="https://www.themoviedb.org/tv/airing-today" class="result_link">
+                                В эфире сегодня
+                            </a>
+                            <a href="https://www.themoviedb.org/tv/on-the-air" class="result_link">
+                                По телевидению
+                            </a>
+                            <a href="https://www.themoviedb.org/tv/top-rated" class="result_link">
+                                Лучшие
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header_hovered_nav_wrapper">
+                    <a href="#" class="header_nav hovered_nav">
+                        Люди
+                    </a>
+                    <div class="hovered_nav_result">
+                        <ul class="result_list">
+                            <a href="https://www.themoviedb.org/person" class="result_link">
+                                Популярные люди
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header_hovered_nav_wrapper">
+                    <a href="#" class="header_nav hovered_nav">
+                        Ещё
+                    </a>
+                    <div class="hovered_nav_result">
+                        <ul class="result_list">
+                            <a href="https://www.themoviedb.org/discuss" class="result_link">
+                                Обсуждения
+                            </a>
+                            <a href="https://www.themoviedb.org/lidearboard" class="result_link">
+                                Доска почёта
+                            </a>
+                            <a href="https://www.themoviedb.org/talk" class="result_link">
+                                Поддержка
+                            </a>
+                            <a href="https://www.themoviedb.org/documentation/api" class="result_link">
+                                API
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <nav>
+        <div class="nav_items_wrapper">
+            <div class="nav_item active_item">
+                <span class="nav_item_name">Обзор</span>
+            </div>
+            <div class="nav_item">
+                <span class="nav_item_name">Медиа</span>
+            </div>
+            <div class="nav_item">
+                <span class="nav_item_name">Фандом</span>
+            </div>
+            <div class="nav_item">
+                <span class="nav_item_name">Поделиться</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="movie_content_wrapper" id="movie_content_wrapper">
+        <div class="movie_content_head_wrapper">
+            <div class="movie_content_head">
+                <div class="movie_img_wrapper">
+                    <img src="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/wSphEs4KKbewWC01NBtmCJnlZ7y.jpg" class="movie_img">
+                </div>
+                <div class="movie_title_wrapper">
+                    <span class="movie_title">Black Panther: Wakanda Forever</span>
+                    <span class="movie_release_year">(2022)</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="movie_content_wrapper">
+    </main>
+    <script src="../JS/main.js"></script>
 </body>
 </html>

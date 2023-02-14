@@ -112,12 +112,16 @@ async function fetchAPI(url, results_wrapper, type, page = 1) {
 };
 
 async function logAPI(url) {
-    await fetch(`https://api.themoviedb.org${url}api_key=${api_key}`)
+    await fetch(`https://api.themoviedb.org/3${url}api_key=${api_key}`)
     .then(result => result.json())
-    .then(obj => console.log(obj));
+    .then(obj => obj.results ? showOnConsole(obj.results) : console.log(obj));
 };
 
-logAPI("/person/latest?")
+function showOnConsole(arr) {
+    arr.forEach(item => console.log(item))
+}
+
+logAPI("/movie/latest?");
 
 function activateFilter(filterName, position) {
     var item = document.querySelector(`#${filterName} > .list_filter_wrapper`);
