@@ -22,13 +22,19 @@ nav {
             width: fit-content;
             gap: 10px;
             position: relative;
-            &::before {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                background-color: white;
-                width: 100%;
-                height: 4px;
+            .hovered_nav_result {
+                top: calc(100% - 6px);
+            }
+            .nav_item_name {
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    background-color: white;
+                    width: 100%;
+                    height: 4px;
+                }
             }
             &::after {
                 content: '';
@@ -40,15 +46,23 @@ nav {
                 height: 7px;
             }
             &:hover {
-                opacity: 0.8;
-                &::after {
+                cursor: pointer;
+                .nav_item_name {
                     opacity: 0.8;
+                    & + .hovered_nav_result {
+                        display: block;
+                    }
+                }
+                &::after {
+                    opacity: 0.5;
                 }
             }
         }
         .active_item {
-            &::before {
-                background-color: $light-blue;
+            .nav_item_name {
+                &::before {
+                    background-color: $light-blue;
+                }
             }
         }
     }
