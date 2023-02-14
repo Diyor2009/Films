@@ -513,19 +513,38 @@ nav .nav_items_wrapper .nav_item {
   width: -moz-fit-content;
   width: fit-content;
   gap: 10px;
-  border-bottom: 4px solid white;
+  position: relative;
+}
+nav .nav_items_wrapper .nav_item::before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  width: 100%;
+  height: 4px;
 }
 nav .nav_items_wrapper .nav_item::after {
-  content: "\e006";
-  font-weight: 600;
+  content: "";
+  background-size: cover;
+  background-position: 0 0;
+  background-image: url("../../../Images/triangle.png");
+  rotate: 180deg;
+  width: 7px;
+  height: 7px;
 }
-nav .nav_items_wrapper .active_item {
-  border-color: rgb(1, 180, 228);
+nav .nav_items_wrapper .nav_item:hover {
+  opacity: 0.8;
+}
+nav .nav_items_wrapper .nav_item:hover::after {
+  opacity: 0.8;
+}
+nav .nav_items_wrapper .active_item::before {
+  background-color: rgb(1, 180, 228);
 }
 
 .movie_content_wrapper .movie_content_head_wrapper {
+  height: calc(100vh - 110px);
   width: 100%;
-  height: 100%;
   background-size: cover;
   background-position: 240px 0;
   background-image: url("https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/xDMIl84Qo5Tsu62c9DGWhmPI67A.jpg");
@@ -536,7 +555,6 @@ nav .nav_items_wrapper .active_item {
   gap: 40px;
   justify-content: center;
   width: 100%;
-  height: calc(100vh - 110px);
   padding: 40px 60px;
   color: white;
   width: 100%;
