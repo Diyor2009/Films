@@ -121,8 +121,6 @@ function showOnConsole(arr) {
     arr.forEach(item => console.log(item))
 }
 
-logAPI("/movie/latest?");
-
 function activateFilter(filterName, position) {
     var item = document.querySelector(`#${filterName} > .list_filter_wrapper`);
     var leftFilter = item.firstElementChild;
@@ -140,7 +138,7 @@ function activateFilter(filterName, position) {
                 setTimeout(() => {
                     indicator.style.left = "0";
                     indicator.style.width = `${leftFilter.offsetWidth}px`;
-                }, 0)
+                }, 0);
             };
             if (position == "right" || rightFilter.className.includes("active_filter") || indicator.className.includes("indicator_on_right")) {
                 filter.filter[1].activation(filterName);
@@ -175,12 +173,25 @@ function showFilters() {
     });
 };
 
-function showDateOfMovie(date) {
+function showDateOfMovie(date, time) {
     var year = date.slice(0, 4);
     var month = +(date.slice(5, 7));
     month = months[month - 1].slice(0, 3);
     var day = (date.slice(8, 10));
-    return `${day} ${month} ${year}`;
+    if (date.length === 10) {
+        if (time == "date") {
+            return `${day} ${month} ${year}`;
+        };
+        if (time == "year") {
+            return `${year}`;
+        };
+        if (time == "day") {
+            return `${day}`;
+        };
+        if (time == "month") {
+            return `${month}`;
+        };
+    };
 };
 
 function getPercentColor(percent) {
@@ -227,7 +238,7 @@ function showMovie(arr, results_wrapper, type) {
                     ${movie.title ?? movie.name}
                 </a>
                 <div class="card_date">
-                    ${showDateOfMovie(movie.release_date ?? movie.first_air_date)}
+                    ${showDateOfMovie(movie.release_date ?? movie.first_air_date, "date")}
                 </div>
             </div>
         </div>

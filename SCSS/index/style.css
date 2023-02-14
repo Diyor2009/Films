@@ -188,7 +188,11 @@
   gap: 0;
 }
 .hovered_nav_result .result_list .result_link {
-  padding: 6px 60px 6px 20px;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 6px 60px 6px 30px;
   font-family: "Source Sans Pro", Arial, sans-serif;
   color: black;
   white-space: nowrap;
@@ -196,6 +200,9 @@
 }
 .hovered_nav_result .result_list .result_link:hover {
   background-color: #f8f9fa;
+}
+.hovered_nav_result .result_list .result_link:nth-child(6) {
+  margin-bottom: 10px;
 }
 
 * {

@@ -17,13 +17,18 @@
         height: 100%;
         gap: 0;
         .result_link {
-            padding: 6px 60px 6px 20px;
+            width: fit-content;
+            height: fit-content;
+            padding: 6px 60px 6px 30px;
             font-family: 'Source Sans Pro', Arial, sans-serif;
             color: black;
             white-space: nowrap;
             transition: 0.3s;
             &:hover {
                 background-color: $lighter-gray;
+            }
+            &:nth-child(6) {
+                margin-bottom: 10px;
             }
         }
     }
