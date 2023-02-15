@@ -174,11 +174,12 @@ function showFilters() {
 };
 
 function showDateOfMovie(date, time) {
+    console.log(`date: ${date}; time: ${time}`);
     var year = date.slice(0, 4);
     var month = +(date.slice(5, 7));
     month = months[month - 1].slice(0, 3);
     var day = (date.slice(8, 10));
-    if (date.length === 10) {
+    if (date.length == 10) {
         if (time == "date") {
             return `${day} ${month} ${year}`;
         };
