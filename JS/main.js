@@ -174,25 +174,26 @@ function showFilters() {
 };
 
 function showDateOfMovie(date, time) {
-    console.log(`date: ${date}; time: ${time}`);
-    var year = date.slice(0, 4);
-    var month = +(date.slice(5, 7));
-    month = months[month - 1].slice(0, 3);
-    var day = (date.slice(8, 10));
-    if (date.length == 10) {
-        if (time == "date") {
-            return `${day} ${month} ${year}`;
+    if (date && time) {
+        var year = date.slice(0, 4);
+        var month = +(date.slice(5, 7));
+        month = months[month - 1].slice(0, 3);
+        var day = (date.slice(8, 10));
+        if (date.length == 10) {
+            if (time == "date") {
+                return `${day} ${month} ${year}`;
+            };
+            if (time == "year") {
+                return `${year}`;
+            };
+            if (time == "day") {
+                return `${day}`;
+            };
+            if (time == "month") {
+                return `${month}`;
+            };
         };
-        if (time == "year") {
-            return `${year}`;
-        };
-        if (time == "day") {
-            return `${day}`;
-        };
-        if (time == "month") {
-            return `${month}`;
-        };
-    };
+    }
 };
 
 function getPercentColor(percent) {
@@ -239,7 +240,7 @@ function showMovie(arr, results_wrapper, type) {
                     ${movie.title ?? movie.name}
                 </a>
                 <div class="card_date">
-                    ${showDateOfMovie(movie.release_date ?? movie.first_air_date, "date")}
+                    ${showDateOfMovie(movie.release_date ?? movie.first_air_date, "date") ?? ""}
                 </div>
             </div>
         </div>
