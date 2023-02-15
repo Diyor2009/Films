@@ -4,7 +4,6 @@
   src: url("../../Fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf");
 }
 .popularity_wrapper {
-  position: absolute;
   width: 35px;
   height: 35px;
   border-radius: 50%;
@@ -12,8 +11,6 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  top: -20px;
-  left: 10px;
   background-color: #081c22;
   color: white;
   outline: 1px solid #081c22;
@@ -163,9 +160,6 @@
   height: 35px;
   top: -20px;
   left: 10px;
-  background-color: #081c22;
-  color: white;
-  outline: 1px solid #081c22;
 }
 .films_list_wrapper .films_list .card_wrapper .about_card_wrapper .card_title {
   font-weight: 600;
@@ -698,4 +692,9 @@ nav .nav_items_wrapper .active_item .nav_item_name::before {
   gap: 10px;
   width: 100%;
   height: 300px;
+  margin-top: 50px;
+  padding-left: 20px;
+}
+.movie_content_wrapper .movie_content_head_wrapper .movie_content_head .movie_content_info_wrapper .popularity_wrapper {
+  scale: 2;
 }/*# sourceMappingURL=style.css.map */

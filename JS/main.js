@@ -118,8 +118,8 @@ async function logAPI(url) {
 };
 
 function showOnConsole(arr) {
-    arr.forEach(item => console.log(item))
-}
+    arr.forEach(item => console.log(item));
+};
 
 function activateFilter(filterName, position) {
     var item = document.querySelector(`#${filterName} > .list_filter_wrapper`);
