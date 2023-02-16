@@ -107,9 +107,28 @@
                 width: 100%;
                 height: 300px;
                 margin-top: 50px;
-                padding-left: 20px;
-                .popularity_wrapper {
-                    scale: 2;
+                .movie_estimation_wrapper {
+                    font-family: 'Inter', Arial, sans-serif;
+                    display: flex;
+                    flex-direction: row;
+                    gap: 20px;
+                    align-items: center;
+                    width: fit-content;
+                    height: fit-content;
+                    .movie_rating_wrapper {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 10px;
+                        .popularity_wrapper {
+                            scale: 1.8;
+                            margin: 18px;
+                        }
+                        .movie_rating_title {
+                            font-weight: 600;
+                            font-size: 14px;
+                        }
+                    }
                 }
             }
         }
