@@ -584,12 +584,14 @@ nav .nav_items_wrapper .active_item .nav_item_name::before {
   background-size: cover;
   background-position: 240px 0;
   background-image: url("https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/xDMIl84Qo5Tsu62c9DGWhmPI67A.jpg");
+  background-repeat: no-repeat;
 }
 .movie_content_wrapper .movie_content_head_wrapper .movie_content_head {
   display: flex;
   flex-direction: row;
   gap: 40px;
   justify-content: center;
+  align-items: center;
   width: 100%;
   padding: 40px 80px;
   color: white;
