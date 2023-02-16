@@ -1,5 +1,6 @@
 .movie_content_wrapper {
     padding: 0;
+    z-index: -1;
     .movie_content_head_wrapper {
         height: calc(100vh - 110px);
         width: 100%;
@@ -212,7 +213,7 @@
                     font-family: 'Source Sans Pro', Arial, sans-serif;
                     display: flex;
                     flex-direction: column;
-                    gap: 20px;
+                    gap: 10px;
                     width: fit-content;
                     height: fit-content;
                     .movie_part_text {
@@ -234,10 +235,11 @@
                         flex-direction: column;
                         gap: 10px;
                         .overview_title {
-                            font-size: 22px;
+                            font-size: 20px;
                             font-weight: 600;
                         }
                         .overview {
+                            font-size: 16.1px;
                             white-space: normal;
                             word-wrap: break-word;
                             text-overflow: clip;

@@ -576,6 +576,7 @@ nav .nav_items_wrapper .active_item .nav_item_name::before {
 
 .movie_content_wrapper {
   padding: 0;
+  z-index: -1;
 }
 .movie_content_wrapper .movie_content_head_wrapper {
   height: calc(100vh - 110px);
@@ -816,7 +817,7 @@ nav .nav_items_wrapper .active_item .nav_item_name::before {
   font-family: "Source Sans Pro", Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   width: -moz-fit-content;
   width: fit-content;
   height: -moz-fit-content;
@@ -842,10 +843,11 @@ nav .nav_items_wrapper .active_item .nav_item_name::before {
   gap: 10px;
 }
 .movie_content_wrapper .movie_content_head_wrapper .movie_content_head .about_movie_wrapper .movie_overview_wrapper .movie_overview .overview_title {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
 }
 .movie_content_wrapper .movie_content_head_wrapper .movie_content_head .about_movie_wrapper .movie_overview_wrapper .movie_overview .overview {
+  font-size: 16.1px;
   white-space: normal;
   word-wrap: break-word;
   text-overflow: clip;
