@@ -12,19 +12,20 @@
             gap: 40px;
             justify-content: center;
             width: 100%;
-            padding: 40px 60px;
+            padding: 40px 80px;
             color: white;
             width: 100%;
             height: 100%;
             background: linear-gradient(to right, rgba(31.5, 31.5, 10.5, 1) calc((50vw - 170px) - 340px), rgba(31.5, 31.5, 10.5, 0.84) 30%, rgba(31.5, 31.5, 10.5, 0.84) 100%);
             .movie_img_wrapper {
-                border-radius: 8px;
-                overflow: hidden;
                 width: fit-content;
                 height: fit-content;
                 .movie_img {
+                    border-radius: 8px;
                     max-width: 300px;
                     max-height: 450px;
+                    height: 450px;
+                    width: 300px;
                 }
             }
             .movie_title_wrapper {
@@ -99,34 +100,147 @@
                     }
                 }
             }
-            .movie_content_info_wrapper {
+            .about_movie_wrapper {
                 display: flex;
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                width: 100%;
-                height: 300px;
-                margin-top: 50px;
-                .movie_estimation_wrapper {
-                    font-family: 'Inter', Arial, sans-serif;
+                gap: 20px;
+                width: fit-content;
+                height: fit-content;
+                .movie_content_info_wrapper {
                     display: flex;
-                    flex-direction: row;
+                    flex-direction: column;
+                    align-items: flex-start;
                     gap: 20px;
-                    align-items: center;
+                    width: 100%;
+                    .movie_estimation_wrapper {
+                        font-family: 'Inter', Arial, sans-serif;
+                        display: flex;
+                        flex-direction: row;
+                        gap: 20px;
+                        align-items: center;
+                        width: fit-content;
+                        height: fit-content;
+                        .movie_rating_wrapper {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            gap: 10px;
+                            .popularity_wrapper {
+                                scale: 1.85;
+                                margin: 18px;
+                            }
+                            .movie_rating_title {
+                                font-weight: 600;
+                                font-size: 14px;
+                            }
+                        }
+                        .movie_options_wrapper {
+                            display: flex;
+                            flex-direction: row;
+                            gap: 20px;
+                            width: fit-content;
+                            height: fit-content;
+                            .movie_option {
+                                width: 46px;
+                                height: 46px;
+                                padding: 14px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-radius: 50%;
+                                background-color: $dark-blue;
+                                position: relative;
+                                .option_tooltip {
+                                    display: none;
+                                    position: absolute;
+                                    left: auto;
+                                    right: auto;
+                                    top: calc(100% + 10px);
+                                    width: fit-content;
+                                    height: fit-content;
+                                    padding: 4px 12px;
+                                    background-color: $dark-blue;
+                                    border-radius: 4px;
+                                    &::before {
+                                        content: '';
+                                        position: absolute;
+                                        bottom: 100%;
+                                        left: calc(50% - 6px);
+                                        border: 6px solid;
+                                        border-color: transparent transparent $dark-blue transparent;
+                                    }
+                                    .tooltip_text {
+                                        font-size: 14px;
+                                        color: white;
+                                        white-space: nowrap;
+                                    }
+                                }
+                                &:hover {
+                                    cursor: pointer;
+                                    & > .option_tooltip {
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
+                        .movie_trailer_link {
+                            font-size: 14px;
+                            font-weight: 600;
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            width: fit-content;
+                            height: fit-content;
+                            gap: 8px;
+                            &:hover {
+                                cursor: pointer;
+                                opacity: 0.7;
+                            }
+                            &::before {
+                                content: '';
+                                width: 14px;
+                                height: 14px;
+                                display: inline-block;
+                                background-image: url("../../Images/triangle.jpg");
+                                background-size: cover;
+                                background-repeat: no-repeat;
+                            }
+                        }
+                    }
+                }
+                .movie_overview_wrapper {
+                    font-family: 'Source Sans Pro', Arial, sans-serif;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
                     width: fit-content;
                     height: fit-content;
-                    .movie_rating_wrapper {
+                    .movie_part_text {
+                        font-size: 18px;
+                        opacity: 0.7;
+                        font-style: italic;
                         display: flex;
                         flex-direction: row;
                         align-items: center;
-                        gap: 10px;
-                        .popularity_wrapper {
-                            scale: 1.8;
-                            margin: 18px;
+                        &::after {
+                            content: '»';
                         }
-                        .movie_rating_title {
+                        &::before {
+                            content: '«';
+                        }
+                    }
+                    .movie_overview {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                        .overview_title {
+                            font-size: 22px;
                             font-weight: 600;
-                            font-size: 14px;
+                        }
+                        .overview {
+                            white-space: normal;
+                            word-wrap: break-word;
+                            text-overflow: clip;
                         }
                     }
                 }
