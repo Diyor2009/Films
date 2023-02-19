@@ -168,6 +168,7 @@ function showFilters() {
                     <span class="list_shadow"></span>
                 </div>
             `;
+
             activateFilter(filter.filterId);
         };
     });
@@ -249,5 +250,3 @@ function showMovie(arr, results_wrapper, type) {
 };
 
 showFilters();
-
-console.log(location);

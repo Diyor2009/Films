@@ -3,11 +3,12 @@
     flex-direction: column;
     padding: 40px 0 0 0;
     width: 100%;
-    height: fit-content;
-    background-image: url(https://www.themoviedb.org/assets/2/v4/misc/trending-bg-39afc2a5f77e31d469b25c187814c0a2efef225494c038098d62317d923f8415.svg);
-    background-repeat: no-repeat;
-    background-position: 50% 205px;
-    background-size: 100%;
+    &:nth-child(1) {
+        background-image: url(https://www.themoviedb.org/assets/2/v4/misc/trending-bg-39afc2a5f77e31d469b25c187814c0a2efef225494c038098d62317d923f8415.svg);
+        background-repeat: no-repeat;
+        background-position: 50% 205px;
+        background-size: 100%;
+    }
     height: fit-content;
     .list_head_wrapper {
         display: flex;
