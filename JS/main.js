@@ -236,7 +236,7 @@ function showMovie(arr, results_wrapper, type) {
                         </div>
                     </div>
                 </div>
-                <a href="${movie_link}" class="card_title">
+                <a class="card_title">
                     ${movie.title ?? movie.name}
                 </a>
                 <div class="card_date">
@@ -249,3 +249,5 @@ function showMovie(arr, results_wrapper, type) {
 };
 
 showFilters();
+
+console.log(location);
