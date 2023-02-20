@@ -216,10 +216,9 @@ function showMovie(arr, results_wrapper, type) {
     res.innerHTML = "";
     
     arr.forEach(movie => {
-        var movie_link = `https://www.themoviedb.org/${movie.media_type ?? type}${getMovieLink(movie.id, (movie.original_title ?? movie.original_name))}`
         res.innerHTML += `
         <div class="card_wrapper">
-            <a href="${movie_link}" class="img_wrapper">
+            <a class="img_wrapper" onclick="getDetailsOfMovie(\`${movie.id}\`, \`${movie.media_type ?? type}\`)">
                 <img class="card_img" src="${images_url}/${movie.poster_path}">
             </a>
             <div class="about_card_wrapper">
@@ -237,7 +236,7 @@ function showMovie(arr, results_wrapper, type) {
                         </div>
                     </div>
                 </div>
-                <a class="card_title">
+                <a class="card_title" onclick="getDetailsOfMovie(${movie.id}, ${movie.media_type ?? type})">
                     ${movie.title ?? movie.name}
                 </a>
                 <div class="card_date">
@@ -250,3 +249,7 @@ function showMovie(arr, results_wrapper, type) {
 };
 
 showFilters();
+
+function getDetailsOfMovie(id, media_type) {
+    location.href = `${location.protocol}//${location.host}/HTML/movies.html?id=${id}&media_type=${media_type}`
+}

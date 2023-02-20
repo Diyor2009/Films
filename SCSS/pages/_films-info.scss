@@ -6,7 +6,6 @@
         width: 100%;
         background-size: cover;
         background-position: 240px 0;
-        background-image: url("https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/xDMIl84Qo5Tsu62c9DGWhmPI67A.jpg");
         background-repeat: no-repeat;
         .movie_content_head {
             display: flex;
@@ -225,12 +224,6 @@
                         display: flex;
                         flex-direction: row;
                         align-items: center;
-                        &::after {
-                            content: '»';
-                        }
-                        &::before {
-                            content: '«';
-                        }
                     }
                     .movie_overview {
                         display: flex;

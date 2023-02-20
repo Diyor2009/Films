@@ -584,7 +584,6 @@ nav .nav_items_wrapper .active_item .nav_item_name::before {
   width: 100%;
   background-size: cover;
   background-position: 240px 0;
-  background-image: url("https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/xDMIl84Qo5Tsu62c9DGWhmPI67A.jpg");
   background-repeat: no-repeat;
 }
 .movie_content_wrapper .movie_content_head_wrapper .movie_content_head {
@@ -833,12 +832,6 @@ nav .nav_items_wrapper .active_item .nav_item_name::before {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-.movie_content_wrapper .movie_content_head_wrapper .movie_content_head .about_movie_wrapper .movie_overview_wrapper .movie_part_text::after {
-  content: "»";
-}
-.movie_content_wrapper .movie_content_head_wrapper .movie_content_head .about_movie_wrapper .movie_overview_wrapper .movie_part_text::before {
-  content: "«";
 }
 .movie_content_wrapper .movie_content_head_wrapper .movie_content_head .about_movie_wrapper .movie_overview_wrapper .movie_overview {
   display: flex;
