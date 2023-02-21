@@ -236,7 +236,7 @@ function showMovie(arr, results_wrapper, type) {
                         </div>
                     </div>
                 </div>
-                <a class="card_title" onclick="getDetailsOfMovie(${movie.id}, ${movie.media_type ?? type})">
+                <a class="card_title" onclick="getDetailsOfMovie(\`${movie.id}\`, \`${movie.media_type ?? type}\`)">
                     ${movie.title ?? movie.name}
                 </a>
                 <div class="card_date">

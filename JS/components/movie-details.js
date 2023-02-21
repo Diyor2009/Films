@@ -1,6 +1,7 @@
 var media_type = location.search.slice(location.search.search("media_type") + 11, location.length);
 var movie_id = location.search.slice(4, location.search.search("media_type") - 1);
 var main = document.getElementById("movie_content_wrapper");
+var title = document.getElementsByTagName("title")[0];
 
 fetchAPI();
 
@@ -9,6 +10,8 @@ async function fetchAPI() {
     .then(res => res.json())
     .then(obj => showMovieContent(obj));
 };
+
+
 
 function getPercentColor(percent) {
     if (percent >= 70) {
@@ -20,6 +23,7 @@ function getPercentColor(percent) {
     };
 };
 
+
 function showGenres(array) {
     var result = ``;
     array.forEach(genre => {
@@ -28,21 +32,19 @@ function showGenres(array) {
     return result.slice(0, result.length - 2);
 }
 
-console.log((103 / 10) * 2);
-
-function getGradient(img) {
-    var canvas = document.createElement("canvas");
-    var c = canvas.getContext('2d');
-    c.width = canvas.width = img.width;
-    c.height = canvas.height = img.height;
-    c.clearRect(0, 0, c.width, c.height);
-    c.drawImage(img, 0, 0, img.width , img.height);
-    return c;
+function getRunTimeOfMovie(minutes) {
+    minutes = +minutes;
+    let hours = Math.trunc(minutes / 60);
+    if (hours === 0) {
+        return `м${minutes}`
+    } else {
+        return `ч${Math.trunc(minutes / 60)} м${(minutes % 60)}`
+    }
 }
 
 function showMovieContent(movie) {
     console.log(movie);
-    console.log(`<div class="movie_content_head_wrapper" style="background-image: url(https://www.themoviedb.org/t/p/original${movie.backdrop_path});">`);
+    title.innerHTML = `TMDB Films - ${movie.name ?? movie.title ?? movie.title ?? movie.original_title ?? movie.original_title}`
     main.innerHTML = `
         <div class="movie_content_head_wrapper" style="background-image: url(https://www.themoviedb.org/t/p/original${movie.backdrop_path});">
         <div class="movie_content_head">
@@ -59,7 +61,7 @@ function showMovieContent(movie) {
                         <span class="version_btn">PG-13</span>
                         <span class="title_release_date">${(movie.release_date ?? movie.first_air_date).split("-").join("/")} (${movie.production_countries[0].iso_3166_1.toUpperCase()})</span>
                         <span class="title_genres">${showGenres(movie.genres)}</span>
-                        <span class="title_time">2h 41m</span>
+                        <span class="title_time">${getRunTimeOfMovie(movie.runtime ?? movie.episode_run_time[0])}</span>
                     </div>
                 </div>
                 <div class="movie_content_info_wrapper">
