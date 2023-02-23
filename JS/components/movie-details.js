@@ -23,7 +23,6 @@ function getPercentColor(percent) {
     };
 };
 
-
 function showGenres(array) {
     var result = ``;
     array.forEach(genre => {

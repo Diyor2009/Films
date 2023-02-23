@@ -4,9 +4,6 @@ var api_key = "d14b1adbe04d8ccc380f0580684188f5";
 var images_url = "https://image.tmdb.org/t/p/original";
 var header = document.getElementsByTagName("header")[0];
 var img = document.getElementById("img");
-// import {header, img} from "./html_varaibles.js";
-
-// img.setAttribute("src", "https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,00192f,00baff)/hPea3Qy5Gd6z4kJLUruBbwAH8Rm.jpg")
 
 const FILTERS = {
     trending_this_day: "/trending/all/day?",
@@ -17,6 +14,7 @@ const FILTERS = {
 
 var listFilters = [
     {
+        backgrounded: false,
         filterName: "В тренде",
         filterId: "trend",
         filter: [
@@ -45,8 +43,38 @@ var listFilters = [
         ]
     },
     {
+        backgrounded: false,
         filterName: "Что популярно",
         filterId: "popular",
+        filter: [
+            {
+                type: "filter",
+                name: "По ТВ",
+                filter_media_type: "tv",
+                activation: function(wrapper) {
+                    return fetchAPI(this.api, wrapper, this.filter_media_type);
+                },
+                api: FILTERS.popular_on_tv,
+            },
+            {
+                type: "filter",
+                name: "В кинотеатрах",
+                filter_media_type: "movie",
+                activation: function(wrapper) {
+                    return fetchAPI(this.api, wrapper, this.filter_media_type);
+                },
+                api: FILTERS.popular_on_theatres,
+            },
+            {
+                type: "indicator",
+                position: "left"
+            }
+        ]
+    },
+    {
+        backgrounded: true,
+        filterName: "Лучшие за всё время",
+        filterId: "trailers",
         filter: [
             {
                 type: "filter",
@@ -109,16 +137,6 @@ async function fetchAPI(url, results_wrapper, type, page = 1) {
     await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU&page=${page}`)
     .then(result => result.json())
     .then(obj => showMovie(obj.results, results_wrapper, type));
-};
-
-async function logAPI(url) {
-    await fetch(`https://api.themoviedb.org/3${url}api_key=${api_key}`)
-    .then(result => result.json())
-    .then(obj => obj.results ? showOnConsole(obj.results) : console.log(obj));
-};
-
-function showOnConsole(arr) {
-    arr.forEach(item => console.log(item));
 };
 
 function activateFilter(filterName, position) {
@@ -216,6 +234,7 @@ function showMovie(arr, results_wrapper, type) {
     res.innerHTML = "";
     
     arr.forEach(movie => {
+        console.log(movie);
         res.innerHTML += `
         <div class="card_wrapper">
             <a class="img_wrapper" onclick="getDetailsOfMovie(\`${movie.id}\`, \`${movie.media_type ?? type}\`)">
