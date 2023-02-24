@@ -10,6 +10,8 @@ const FILTERS = {
     trending_this_week: "/trending/all/week?",
     popular_on_theatres: "/movie/popular?",
     popular_on_tv: "/tv/popular?",
+    top_rated_on_tmdb: "/movie/top_rated?",
+    top_rated_on_tv: "/tv/top_rated?",
 }
 
 var listFilters = [
@@ -22,8 +24,8 @@ var listFilters = [
                 type: "filter",
                 name: "Сегодня",
                 filter_media_type: "movie",
-                activation: function(wrapper) {
-                    return fetchAPI(this.api, wrapper, this.filter_media_type);
+                activation: function(wrapper, type) {
+                    return fetchAPI(this.api, wrapper, this.filter_media_type, type);
                 },
                 api: FILTERS.trending_this_day,
             },
@@ -31,8 +33,8 @@ var listFilters = [
                 type: "filter",
                 name: "На этой неделе",
                 filter_media_type: "all",
-                activation: function(wrapper) {
-                    return fetchAPI(this.api, wrapper, this.filter_media_type);
+                activation: function(wrapper, type) {
+                    return fetchAPI(this.api, wrapper, this.filter_media_type, type);
                 },
                 api: FILTERS.trending_this_week,
             },
@@ -51,8 +53,8 @@ var listFilters = [
                 type: "filter",
                 name: "По ТВ",
                 filter_media_type: "tv",
-                activation: function(wrapper) {
-                    return fetchAPI(this.api, wrapper, this.filter_media_type);
+                activation: function(wrapper, type) {
+                    return fetchAPI(this.api, wrapper, this.filter_media_type, type);
                 },
                 api: FILTERS.popular_on_tv,
             },
@@ -60,8 +62,8 @@ var listFilters = [
                 type: "filter",
                 name: "В кинотеатрах",
                 filter_media_type: "movie",
-                activation: function(wrapper) {
-                    return fetchAPI(this.api, wrapper, this.filter_media_type);
+                activation: function(wrapper, type) {
+                    return fetchAPI(this.api, wrapper, this.filter_media_type, type);
                 },
                 api: FILTERS.popular_on_theatres,
             },
@@ -74,25 +76,25 @@ var listFilters = [
     {
         backgrounded: true,
         filterName: "Лучшие за всё время",
-        filterId: "trailers",
+        filterId: "top_rated",
         filter: [
             {
                 type: "filter",
                 name: "По ТВ",
                 filter_media_type: "tv",
-                activation: function(wrapper) {
-                    return fetchAPI(this.api, wrapper, this.filter_media_type);
+                activation: function(wrapper, type) {
+                    return fetchAPI(this.api, wrapper, this.filter_media_type, type);
                 },
-                api: FILTERS.popular_on_tv,
+                api: FILTERS.top_rated_on_tv,
             },
             {
                 type: "filter",
-                name: "В кинотеатрах",
+                name: "В TMDB",
                 filter_media_type: "movie",
-                activation: function(wrapper) {
-                    return fetchAPI(this.api, wrapper, this.filter_media_type);
+                activation: function(wrapper, type) {
+                    return fetchAPI(this.api, wrapper, this.filter_media_type, type);
                 },
-                api: FILTERS.popular_on_theatres,
+                api: FILTERS.top_rated_on_tmdb,
             },
             {
                 type: "indicator",
@@ -133,10 +135,10 @@ function scrollingEffect() {
     windowPosition = scrollPosition;
 };
 
-async function fetchAPI(url, results_wrapper, type, page = 1) {
+async function fetchAPI(url, results_wrapper, media_type, type, page = 1) {
     await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU&page=${page}`)
     .then(result => result.json())
-    .then(obj => showMovie(obj.results, results_wrapper, type));
+    .then(obj => showMovie(obj.results, results_wrapper, media_type, type));
 };
 
 function activateFilter(filterName, position) {
@@ -149,7 +151,7 @@ function activateFilter(filterName, position) {
     listFilters.forEach(filter => {
         if (filter.filterId === filterName) {
             if (position == "left" || leftFilter.className.includes("active_filter") || indicator.className.includes("indicator_on_left")) {
-                filter.filter[0].activation(filterName);
+                filter.filter[0].activation(filterName, `${filter.backgrounded}`);
                 indicator.classList.remove("indicator_on_right");
                 rightFilter.classList.remove("active_filter");
                 leftFilter.classList.add("active_filter");
@@ -159,7 +161,7 @@ function activateFilter(filterName, position) {
                 }, 0);
             };
             if (position == "right" || rightFilter.className.includes("active_filter") || indicator.className.includes("indicator_on_right")) {
-                filter.filter[1].activation(filterName);
+                filter.filter[1].activation(filterName, `${filter.backgrounded}`);
                 indicator.classList.remove("indicator_on_left");
                 leftFilter.classList.remove("active_filter");
                 rightFilter.classList.add("active_filter");
@@ -186,7 +188,6 @@ function showFilters() {
                     <span class="list_shadow"></span>
                 </div>
             `;
-
             activateFilter(filter.filterId);
         };
     });
@@ -229,46 +230,74 @@ function getMovieLink(movie_id, movie_name) {
     return `/${movie_id}-${`${movie_name.split(":").join(" ").split(".").join(" ").split(" ").join("-")}`.toLowerCase()}`;
 };
 
-function showMovie(arr, results_wrapper, type) {
+function showMovie(arr, results_wrapper, type, backgrounded) {
     let res = document.getElementById(results_wrapper).nextElementSibling;
     res.innerHTML = "";
-    
-    arr.forEach(movie => {
-        console.log(movie);
-        res.innerHTML += `
-        <div class="card_wrapper">
-            <a class="img_wrapper" onclick="getDetailsOfMovie(\`${movie.id}\`, \`${movie.media_type ?? type}\`)">
-                <img class="card_img" src="${images_url}/${movie.poster_path}">
-            </a>
-            <div class="about_card_wrapper">
-                <div class="popularity_wrapper">
-                    <div class="popularity">
-                        <svg viewBox="0 0 36 36" class="circular-chart">
-                            <path class="circle" stroke-dasharray="${+((movie.vote_average.toFixed(1)).split(".").join(""))}, 100" style="stroke: ${getPercentColor(+((movie.vote_average.toFixed(1)).split(".").join("")))};"
-                                d="M18 2.0845
-                                  a 15.9155 15.9155 0 0 1 0 31.831
-                                  a 15.9155 15.9155 0 0 1 0 -31.831"
-                            />
-                        </svg>
-                        <div class="popularity_percent">
-                            ${+((movie.vote_average.toFixed(1)).split(".").join(""))}
+    if (backgrounded == "false") {
+        arr.forEach(movie => {
+            res.innerHTML += `
+            <div class="card_wrapper">
+                <a class="img_wrapper" onclick="getDetailsOfMovie(\`${movie.id}\`, \`${movie.media_type ?? type}\`)">
+                    <img class="card_img" src="${images_url}/${movie.poster_path}">
+                </a>
+                <div class="about_card_wrapper">
+                    <div class="popularity_wrapper">
+                        <div class="popularity">
+                            <svg viewBox="0 0 36 36" class="circular-chart">
+                                <path class="circle" stroke-dasharray="${+((movie.vote_average.toFixed(1)).split(".").join(""))}, 100" style="stroke: ${getPercentColor(+((movie.vote_average.toFixed(1)).split(".").join("")))};"
+                                    d="M18 2.0845
+                                      a 15.9155 15.9155 0 0 1 0 31.831
+                                      a 15.9155 15.9155 0 0 1 0 -31.831"
+                                />
+                            </svg>
+                            <div class="popularity_percent">
+                                ${+((movie.vote_average.toFixed(1)).split(".").join(""))}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <a class="card_title" onclick="getDetailsOfMovie(\`${movie.id}\`, \`${movie.media_type ?? type}\`)">
-                    ${movie.title ?? movie.name}
-                </a>
-                <div class="card_date">
-                    ${showDateOfMovie(movie.release_date ?? movie.first_air_date, "date") ?? ""}
+                    <a class="card_title" onclick="getDetailsOfMovie(\`${movie.id}\`, \`${movie.media_type ?? type}\`)">
+                        ${movie.title ?? movie.name}
+                    </a>
+                    <div class="card_date">
+                        ${showDateOfMovie(movie.release_date ?? movie.first_air_date, "date") ?? ""}
+                    </div>
                 </div>
             </div>
-        </div>
-        `;
-    });
+            `;
+        });
+    } else {
+        arr.forEach(movie => {
+            card_backdrop = `${images_url}/${movie.backdrop_path}`;
+            res.innerHTML += `
+                <div class="long_card" onmouseover="addBackground(\`${results_wrapper}\`, \`${card_backdrop}\`)">
+                    <a class="img_wrapper" onclick="getDetailsOfMovie(\`${movie.id}\`, \`${movie.media_type ?? type}\`)">
+                        <img class="card_img" src="${card_backdrop}">
+                    </a>
+                    <div class="about_card_wrapper">
+                        <a class="card_title" onclick="getDetailsOfMovie(\`${movie.id}\`, \`${movie.media_type ?? type}\`)">
+                            ${movie.title ?? movie.name}
+                        </a>
+                    </div>
+                </div>
+            `;
+        });
+        addBackground(results_wrapper);
+        res.parentElement.parentElement.style = `background-position: 20% 20%; background-size: cover;`;
+    }
+};
+
+function addBackground(wrapper_id, background) {
+    var wrapper = document.getElementById(wrapper_id);
+    var section = wrapper.parentElement;
+    if (background) {
+        section.style.backgroundImage = `url(${background})`
+    } else {
+        section.style.backgroundImage = `${wrapper.nextElementSibling.firstElementChild.firstElementChild.firstElementChild.src}`;
+    }
 };
 
 showFilters();
 
 function getDetailsOfMovie(id, media_type) {
-    location.href = `${location.protocol}//${location.host}/HTML/movies.html?id=${id}&media_type=${media_type}`
-}
+    location.href = `${location.protocol}//${location.host}/HTML/movies.html?id=${id}&media_type=${media_type}`;
+};

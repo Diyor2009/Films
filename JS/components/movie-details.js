@@ -41,9 +41,19 @@ function getRunTimeOfMovie(minutes) {
     }
 }
 
+function getOverview(overview) {
+    if (overview != "") {
+        return overview;
+    } else {
+        return `Нет обзора, переведённого на русский язык. Помогите расширить базу данных, добавив его.`
+    }
+}
+
 function showMovieContent(movie) {
     console.log(movie);
-    title.innerHTML = `TMDB Films - ${movie.name ?? movie.title ?? movie.title ?? movie.original_title ?? movie.original_title}`
+    var movie_release_date = (movie.release_date ?? movie.first_air_date).slice(0, 4)
+    var movie_name = movie.name ?? movie.title ?? movie.original_title ?? movie.original_title;
+    title.innerHTML = `${movie_name} (${movie_release_date}) — The Movie Database (TMDB)`
     main.innerHTML = `
         <div class="movie_content_head_wrapper" style="background-image: url(https://www.themoviedb.org/t/p/original${movie.backdrop_path});">
         <div class="movie_content_head">
@@ -53,8 +63,8 @@ function showMovieContent(movie) {
             <div class="about_movie_wrapper">
                 <div class="movie_title_wrapper">
                     <div class="movie_title">
-                        <span class="movie_title_text">${movie.name ?? movie.title ?? movie.title ?? movie.original_title ?? movie.original_title}</span>
-                        <span class="movie_release_year">(2022)</span>
+                        <span class="movie_title_text">${movie_name}</span>
+                        <span class="movie_release_year">(${movie_release_date})</span>
                     </div>
                     <div class="title_info_wrapper">
                         <span class="version_btn">PG-13</span>
@@ -115,7 +125,7 @@ function showMovieContent(movie) {
                         <div class="movie_overview">
                             <span class="overview_title">Обзор</span>
                             <div class="overview">
-                                ${movie.overview}
+                                ${getOverview(movie.overview)}
                             </div>
                         </div>
                     </div>

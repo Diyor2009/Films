@@ -118,5 +118,43 @@
                 }
             }
         }
+        .long_card {
+            width: 300px;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            &:hover {
+                cursor: pointer;
+            }
+            .card_img {
+                height: 168px;
+                border-radius: 8px;
+                width: 100%;
+                background-size: cover;
+            }
+            .about_card_wrapper {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                gap: 0;
+                padding: 24px 8px 8px 8px;
+                .card_title {
+                    font-weight: 600;
+                    color: black;
+                    &:hover {
+                        cursor: pointer;
+                        color: $light-blue;
+                    }
+                }
+                .card_date {
+                    font-weight: 100;
+                    color: gray;
+                }
+            }
+        }
+    }
+    &.backgrounded {
+        background: $black-gradient;
     }
 }
