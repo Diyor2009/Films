@@ -184,43 +184,65 @@
   font-weight: 100;
   color: gray;
 }
-.films_list_wrapper .films_list .long_card {
+.films_list_wrapper.backgrounded {
+  background: linear-gradient(to right, rgb(0, 0, 0) 20%, rgba(0, 0, 0, 0.711) 30%, rgba(0, 0, 0, 0.541) 100%);
+}
+.films_list_wrapper.backgrounded .list_title {
+  color: white;
+}
+.films_list_wrapper.backgrounded .list_filter_wrapper {
+  outline-color: #1ed5a9;
+}
+.films_list_wrapper.backgrounded .list_filter_wrapper .indicator {
+  background: linear-gradient(to right, rgb(192, 254, 207) 0%, rgb(30, 213, 169) 100%);
+  z-index: 0;
+}
+.films_list_wrapper.backgrounded .list_filter_wrapper .filter_item {
+  z-index: 1;
+  color: white;
+}
+.films_list_wrapper.backgrounded .list_filter_wrapper .active_filter {
+  color: #032541;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+}
+.films_list_wrapper.backgrounded .long_card {
   width: 300px;
   min-width: 300px;
   display: flex;
   flex-direction: column;
   position: relative;
 }
-.films_list_wrapper .films_list .long_card:hover {
+.films_list_wrapper.backgrounded .long_card:hover {
   cursor: pointer;
 }
-.films_list_wrapper .films_list .long_card .card_img {
+.films_list_wrapper.backgrounded .long_card .card_img {
   height: 168px;
   border-radius: 8px;
   width: 100%;
   background-size: cover;
 }
-.films_list_wrapper .films_list .long_card .about_card_wrapper {
+.films_list_wrapper.backgrounded .long_card .about_card_wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0;
-  padding: 24px 8px 8px 8px;
+  padding: 14px 8px 8px 8px;
 }
-.films_list_wrapper .films_list .long_card .about_card_wrapper .card_title {
+.films_list_wrapper.backgrounded .long_card .about_card_wrapper .card_title {
   font-weight: 600;
-  color: black;
+  color: white;
+  text-align: center;
 }
-.films_list_wrapper .films_list .long_card .about_card_wrapper .card_title:hover {
+.films_list_wrapper.backgrounded .long_card .about_card_wrapper .card_title:hover {
   cursor: pointer;
   color: rgb(1, 180, 228);
 }
-.films_list_wrapper .films_list .long_card .about_card_wrapper .card_date {
+.films_list_wrapper.backgrounded .long_card .about_card_wrapper .card_date {
   font-weight: 100;
   color: gray;
-}
-.films_list_wrapper.backgrounded {
-  background: linear-gradient(to right, rgb(0, 0, 0) 20%, rgba(0, 0, 0, 0.711) 30%, rgba(0, 0, 0, 0.541) 100%);
 }
 
 .hovered_nav_result {

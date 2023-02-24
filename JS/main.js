@@ -89,7 +89,7 @@ var listFilters = [
             },
             {
                 type: "filter",
-                name: "В TMDB",
+                name: "В киносайтах",
                 filter_media_type: "movie",
                 activation: function(wrapper, type) {
                     return fetchAPI(this.api, wrapper, this.filter_media_type, type);
@@ -281,18 +281,18 @@ function showMovie(arr, results_wrapper, type, backgrounded) {
                 </div>
             `;
         });
+        res.parentElement.parentElement.style = `background-position: center; background-size: cover; transition: all 0.5s;`;
         addBackground(results_wrapper);
-        res.parentElement.parentElement.style = `background-position: 20% 20%; background-size: cover;`;
     }
 };
 
 function addBackground(wrapper_id, background) {
     var wrapper = document.getElementById(wrapper_id);
-    var section = wrapper.parentElement;
+    var section = wrapper.parentElement.parentElement;
     if (background) {
-        section.style.backgroundImage = `url(${background})`
+        section.style.backgroundImage = `url(${background})`;
     } else {
-        section.style.backgroundImage = `${wrapper.nextElementSibling.firstElementChild.firstElementChild.firstElementChild.src}`;
+        section.style.backgroundImage = `url(${wrapper.nextElementSibling.firstElementChild.firstElementChild.firstElementChild.src})`;
     }
 };
 
