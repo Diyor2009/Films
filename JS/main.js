@@ -36,7 +36,7 @@ var listFilters = [
                 activation: function(wrapper, type) {
                     return fetchAPI(this.api, wrapper, this.filter_media_type, type);
                 },
-                api: FILTERS.trending_this_week,
+                api: FILTERS.trending_this_week
             },
             {
                 type: "indicator",
@@ -56,7 +56,7 @@ var listFilters = [
                 activation: function(wrapper, type) {
                     return fetchAPI(this.api, wrapper, this.filter_media_type, type);
                 },
-                api: FILTERS.popular_on_tv,
+                api: FILTERS.popular_on_tv
             },
             {
                 type: "filter",
@@ -281,6 +281,7 @@ function showMovie(arr, results_wrapper, type, backgrounded) {
                 </div>
             `;
         });
+        res.parentElement.classList.add("backgrounded")
         res.parentElement.parentElement.style = `background-position: center; background-size: cover; transition: all 0.5s;`;
         addBackground(results_wrapper);
     }

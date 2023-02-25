@@ -33,12 +33,14 @@ function showGenres(array) {
 
 function getRunTimeOfMovie(minutes) {
     minutes = +minutes;
+    let result = "";
     let hours = Math.trunc(minutes / 60);
-    if (hours === 0) {
-        return `м${minutes}`
+    if (hours == 0) {
+        result = `м${minutes}`;
     } else {
-        return `ч${Math.trunc(minutes / 60)} м${(minutes % 60)}`
+        result = `ч${Math.trunc(minutes / 60)} м${(minutes % 60)}`;
     }
+    return result;
 }
 
 function getOverview(overview) {
@@ -50,14 +52,15 @@ function getOverview(overview) {
 }
 
 function getProdutionCountry(arr) {
-    if (arr[0]) {
-        return arr[0].iso_3166_1.toUpperCase;
+    if (arr.length != 0) {
+        return arr[0].iso_3166_1.toUpperCase();
     } else {
-        return "MX"
+        return "MX";
     }
 }
 
 function showMovieContent(movie) {
+    console.log(movie);
     var movie_release_date = (movie.release_date ?? movie.first_air_date).slice(0, 4)
     var movie_name = movie.name ?? movie.title ?? movie.original_title ?? movie.original_title;
     title.innerHTML = `${movie_name} (${movie_release_date}) — The Movie Database (TMDB)`
