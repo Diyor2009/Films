@@ -1,3 +1,4 @@
+var main_filters_wrapper = document.getElementsByClassName("main_films_wrapper")[0];
 var filmsListWrapper = document.getElementsByClassName("films_list");
 var main_api_url = "https://api.themoviedb.org/3";
 var api_key = "d14b1adbe04d8ccc380f0580684188f5";
@@ -12,7 +13,7 @@ const FILTERS = {
     popular_on_tv: "/tv/popular?",
     top_rated_on_tmdb: "/movie/top_rated?",
     top_rated_on_tv: "/tv/top_rated?",
-}
+};
 
 var listFilters = [
     {
@@ -37,35 +38,6 @@ var listFilters = [
                     return fetchAPI(this.api, wrapper, this.filter_media_type, type);
                 },
                 api: FILTERS.trending_this_week
-            },
-            {
-                type: "indicator",
-                position: "left"
-            }
-        ]
-    },
-    {
-        backgrounded: false,
-        filterName: "Что популярно",
-        filterId: "popular",
-        filter: [
-            {
-                type: "filter",
-                name: "По ТВ",
-                filter_media_type: "tv",
-                activation: function(wrapper, type) {
-                    return fetchAPI(this.api, wrapper, this.filter_media_type, type);
-                },
-                api: FILTERS.popular_on_tv
-            },
-            {
-                type: "filter",
-                name: "В кинотеатрах",
-                filter_media_type: "movie",
-                activation: function(wrapper, type) {
-                    return fetchAPI(this.api, wrapper, this.filter_media_type, type);
-                },
-                api: FILTERS.popular_on_theatres,
             },
             {
                 type: "indicator",
@@ -102,6 +74,35 @@ var listFilters = [
             }
         ]
     },
+    {
+        backgrounded: false,
+        filterName: "Что популярно",
+        filterId: "popular",
+        filter: [
+            {
+                type: "filter",
+                name: "По ТВ",
+                filter_media_type: "tv",
+                activation: function(wrapper, type) {
+                    return fetchAPI(this.api, wrapper, this.filter_media_type, type);
+                },
+                api: FILTERS.popular_on_tv
+            },
+            {
+                type: "filter",
+                name: "В кинотеатрах",
+                filter_media_type: "movie",
+                activation: function(wrapper, type) {
+                    return fetchAPI(this.api, wrapper, this.filter_media_type, type);
+                },
+                api: FILTERS.popular_on_theatres,
+            },
+            {
+                type: "indicator",
+                position: "left"
+            }
+        ]
+    }
 ];
 
 var months = [
@@ -149,49 +150,81 @@ function activateFilter(filterName, position) {
     leftFilter.classList.remove("active_filter");
     rightFilter.classList.remove("active_filter");
     listFilters.forEach(filter => {
-        if (filter.filterId === filterName) {
+        if (filter.filterId == filterName) {
             if (position == "left" || leftFilter.className.includes("active_filter") || indicator.className.includes("indicator_on_left")) {
                 filter.filter[0].activation(filterName, `${filter.backgrounded}`);
                 indicator.classList.remove("indicator_on_right");
                 rightFilter.classList.remove("active_filter");
                 leftFilter.classList.add("active_filter");
-                setTimeout(() => {
-                    indicator.style.left = "0";
-                    indicator.style.width = `${leftFilter.offsetWidth}px`;
-                }, 0);
+                indicator.style.left = "0";
+                indicator.style.width = `${leftFilter.offsetWidth}px`;
             };
             if (position == "right" || rightFilter.className.includes("active_filter") || indicator.className.includes("indicator_on_right")) {
                 filter.filter[1].activation(filterName, `${filter.backgrounded}`);
                 indicator.classList.remove("indicator_on_left");
                 leftFilter.classList.remove("active_filter");
                 rightFilter.classList.add("active_filter");
-                setTimeout(() => {
-                    indicator.style.left = `${leftFilter.offsetWidth}px`;
-                    indicator.style.width = `${rightFilter.offsetWidth}px`;
-                }, 0)
+                indicator.style.left = `${leftFilter.offsetWidth}px`;
+                indicator.style.width = `${rightFilter.offsetWidth}px`;
             };
         };
     });
 };
 
 function showFilters() {
+    main_filters_wrapper.innerHTML = "";
     listFilters.forEach(filter => {
-        if (document.getElementById(filter.filterId)) {
-            let res = document.getElementById(filter.filterId);
-            res.classList.add("list_head_wrapper");
-            res.innerHTML = `
-                <span class="list_title">${filter.filterName}</span>
-                <div class="list_filter_wrapper">
-                    <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \`left\`)">${filter.filter[0].name}</span>
-                    <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \`right\`)">${filter.filter[1].name}</span>
-                    <span class="indicator indicator_on_${filter.filter[2].position}"></span>
-                    <span class="list_shadow"></span>
-                </div>
+        if (filter.backgrounded == false) {
+            main_filters_wrapper.innerHTML += `
+                <section>
+                    <div class="films_list_wrapper">
+                        <div class="list_head_wrapper" id="${filter.filterId}">
+                            <span class="list_title">${filter.filterName}</span>
+                            <div class="list_filter_wrapper">
+                                <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \`left\`)">${filter.filter[0].name}</span>
+                                <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \`right\`)">${filter.filter[1].name}</span>
+                                <span class="indicator indicator_on_${filter.filter[2].position}"></span>
+                            </div>
+                        </div>
+                        <div class="films_list">
+                        </div>
+                    </div>
+                </section>
             `;
-            activateFilter(filter.filterId);
-        };
+        } else {
+            main_filters_wrapper.innerHTML += `
+                <section class="backgrounded_filter_section">
+                    <div class="films_list_wrapper backgrounded">
+                        <div class="list_head_wrapper" id="${filter.filterId}">
+                            <span class="list_title">${filter.filterName}</span>
+                            <div class="list_filter_wrapper">
+                                <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \`left\`)">${filter.filter[0].name}</span>
+                                <span class="filter_item" onclick="activateFilter(\`${filter.filterId}\`, \`right\`)">${filter.filter[1].name}</span>
+                                <span class="indicator indicator_on_${filter.filter[2].position}"></span>
+                            </div>
+                        </div>
+                        <div class="films_list">
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+        activateFilter(filter.filterId);
     });
 };
+
+showFilters();
+
+for (const list of filmsListWrapper) {
+    // list.addEventListener("scroll", function() {
+        // let wrapper = this.parentElement;
+        // if (this.pageXOffset == "0 0 0") {
+        //     console.log('0');
+        // }
+    //     console.log(this.pageXOffset);
+    // })
+    console.log(list.parentElement.parentElement);
+}
 
 function showDateOfMovie(date, time) {
     if (date && time) {
@@ -233,8 +266,8 @@ function getMovieLink(movie_id, movie_name) {
 function showMovie(arr, results_wrapper, type, backgrounded) {
     let res = document.getElementById(results_wrapper).nextElementSibling;
     res.innerHTML = "";
-    if (backgrounded == "false") {
-        arr.forEach(movie => {
+    arr.forEach(movie => {
+        if (backgrounded == "false") {
             res.innerHTML += `
             <div class="card_wrapper">
                 <a class="img_wrapper" onclick="getDetailsOfMovie(\`${movie.id}\`, \`${movie.media_type ?? type}\`)">
@@ -264,9 +297,7 @@ function showMovie(arr, results_wrapper, type, backgrounded) {
                 </div>
             </div>
             `;
-        });
-    } else {
-        arr.forEach(movie => {
+        } else {
             card_backdrop = `${images_url}/${movie.backdrop_path}`;
             res.innerHTML += `
                 <div class="long_card" onmouseover="addBackground(\`${results_wrapper}\`, \`${card_backdrop}\`)">
@@ -280,11 +311,9 @@ function showMovie(arr, results_wrapper, type, backgrounded) {
                     </div>
                 </div>
             `;
-        });
-        res.parentElement.classList.add("backgrounded")
-        res.parentElement.parentElement.style = `background-position: center; background-size: cover; transition: all 0.5s;`;
-        addBackground(results_wrapper);
-    }
+            addBackground(results_wrapper);
+        };
+    });
 };
 
 function addBackground(wrapper_id, background) {
@@ -294,10 +323,8 @@ function addBackground(wrapper_id, background) {
         section.style.backgroundImage = `url(${background})`;
     } else {
         section.style.backgroundImage = `url(${wrapper.nextElementSibling.firstElementChild.firstElementChild.firstElementChild.src})`;
-    }
+    };
 };
-
-showFilters();
 
 function getDetailsOfMovie(id, media_type) {
     location.href = `${location.protocol}//${location.host}/HTML/movies.html?id=${id}&media_type=${media_type}`;
