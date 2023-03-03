@@ -22,12 +22,47 @@
             .movie_img_wrapper {
                 width: fit-content;
                 height: fit-content;
+                position: relative;
                 .movie_img {
                     border-radius: 8px;
                     max-width: 300px;
                     max-height: 450px;
                     height: 450px;
                     width: 300px;
+                    transition: 0.3s;
+                    &:hover {
+                        & + .img_info_link {
+                            opacity: 1;
+                        }
+                    }
+                }
+                .img_info_link {
+                    transition: 0.3s;
+                    opacity: 0;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0,0,0,0.7);
+                    backdrop-filter: blur(20px);
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 6px;
+                    color: gray;
+                    font-size: 18px;
+                    font-weight: 600;
+                    .fullscreen_icon {
+                        width: 26px;
+                        height: 26px;
+                        margin-bottom: 2px;
+                    }
+                    &:hover {
+                        opacity: 1;
+                        cursor: pointer;
+                    }
                 }
             }
             .movie_title_wrapper {
@@ -131,6 +166,11 @@
                             .popularity_wrapper {
                                 scale: 1.85;
                                 margin: 18px;
+                                transition: 0.3s;
+                                &:hover {
+                                    scale: 2.05;
+                                    cursor: pointer;
+                                }
                             }
                             .movie_rating_title {
                                 font-weight: 600;
@@ -243,6 +283,45 @@
                     }
                 }
             }
+        }
+    }
+}
+
+.movie_images_module {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    .module_content_wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        width: fit-content;
+        height: 600px;
+        background-color: white;
+        padding: 0;
+        position: relative;
+        .close_icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .module_content_img {
+            width: 400px;
+            height: 100%;
+        }
+        .content_info_wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
     }
 }

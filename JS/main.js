@@ -142,6 +142,12 @@ async function fetchAPI(url, results_wrapper, media_type, type, page = 1) {
     .then(obj => showMovie(obj.results, results_wrapper, media_type, type));
 };
 
+async function logAPI(url, media_type, type, page = 1) {
+    await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU&page=${page}`)
+    .then(result => result.json())
+    .then(obj => showMovie(obj.results, results_wrapper, media_type, type));
+};
+
 function activateFilter(filterName, position) {
     var item = document.querySelector(`#${filterName} > .list_filter_wrapper`);
     var leftFilter = item.firstElementChild;
@@ -257,10 +263,6 @@ function getPercentColor(percent) {
     } else if (percent < 70) {
         return "#d2d531";
     };
-};
-
-function getMovieLink(movie_id, movie_name) {
-    return `/${movie_id}-${`${movie_name.split(":").join(" ").split(".").join(" ").split(" ").join("-")}`.toLowerCase()}`;
 };
 
 function showMovie(arr, results_wrapper, type, backgrounded) {

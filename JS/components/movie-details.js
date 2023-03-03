@@ -11,8 +11,6 @@ async function fetchAPI() {
     .then(obj => showMovieContent(obj));
 };
 
-
-
 function getPercentColor(percent) {
     if (percent >= 70) {
         return "#21d07a";
@@ -68,7 +66,11 @@ function showMovieContent(movie) {
         <div class="movie_content_head_wrapper" style="background-image: url(https://www.themoviedb.org/t/p/original${movie.backdrop_path});">
         <div class="movie_content_head">
             <div class="movie_img_wrapper">
-                <img src="https://www.themoviedb.org/t/p/original${movie.poster_path}" class="movie_img">
+                <img onclick="movieInfo(\`show\`)" src="https://www.themoviedb.org/t/p/original${movie.poster_path}" class="movie_img">
+                <div class="img_info_link">
+                    <img class="fullscreen_icon" src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-216-fullscreen-white-87524788011715a9bd73de86ef577442070ebc9873a7abb2845a6310a7f6174a.svg">
+                    Расширить
+                </div>
             </div>
             <div class="about_movie_wrapper">
                 <div class="movie_title_wrapper">
@@ -144,4 +146,8 @@ function showMovieContent(movie) {
         </div>
         </div>
     `;
+}
+
+function movieInfo() {
+    
 }
