@@ -1,14 +1,23 @@
 var media_type = location.search.slice(location.search.search("media_type") + 11, location.length);
 var movie_id = location.search.slice(4, location.search.search("media_type") - 1);
 var main = document.getElementById("movie_content_wrapper");
+var main_content_head = document.getElementById("movie_content_head_wrapper");
 var title = document.getElementsByTagName("title")[0];
 
-fetchAPI();
+fetchAPI(`${media_type}/${movie_id}`, "movie");
+fetchAPI(`${media_type}/${movie_id}/credits`, "cast");
 
-async function fetchAPI() {
-    await fetch(`https://api.themoviedb.org/3/${media_type}/${movie_id}?api_key=d14b1adbe04d8ccc380f0580684188f5&language=ru-RU`)
-    .then(res => res.json())
-    .then(obj => showMovieContent(obj));
+async function fetchAPI(url, type) {
+    if (type == "movie") {
+        await fetch(`https://api.themoviedb.org/3/${url}?api_key=d14b1adbe04d8ccc380f0580684188f5&language=ru-RU`)
+        .then(res => res.json())
+        .then(obj => showMovieContent(obj));
+    }
+    if (type == "cast") {
+        await fetch(`https://api.themoviedb.org/3/${url}?api_key=d14b1adbe04d8ccc380f0580684188f5&language=ru-RU`)
+        .then(res => res.json())
+        .then(obj => showCast(obj.cast));
+    }
 };
 
 function getPercentColor(percent) {
@@ -57,12 +66,31 @@ function getProdutionCountry(arr) {
     }
 }
 
+function showCast(arr) {
+    var cast_list_wrapper = document.getElementById("cast_wrapper");
+    arr.forEach(cast => {
+        console.log(cast);
+        cast_list_wrapper.innerHTML += `
+        <div class="cast_card_wrapper">
+            <div class="cast_img_wrapper">
+                <img src="https://www.themoviedb.org/t/p/w138_and_h175_face${cast.profile_path}" class="cast_img">
+            </div>
+            <div class="cast_info_wrapper">
+                <span class="cast_name">${cast.name ?? cast.original_name}</span>
+                <span class="cast_original_name">${cast.character}</span>
+                <span class="cast_episodes">9 эпизодов</span>
+            </div>
+        </div>
+        `
+    })
+}
+
 function showMovieContent(movie) {
-    console.log(movie);
+    // console.log(movie);
     var movie_release_date = (movie.release_date ?? movie.first_air_date).slice(0, 4)
     var movie_name = movie.name ?? movie.title ?? movie.original_title ?? movie.original_title;
     title.innerHTML = `${movie_name} (${movie_release_date}) — The Movie Database (TMDB)`
-    main.innerHTML = `
+    main_content_head.innerHTML = `
         <div class="movie_content_head_wrapper" style="background-image: url(https://www.themoviedb.org/t/p/original${movie.backdrop_path});">
         <div class="movie_content_head">
             <div class="movie_img_wrapper">
