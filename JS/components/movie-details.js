@@ -1,23 +1,48 @@
+var main = document.getElementById("movie_content_wrapper");
+var header = document.getElementsByTagName("header")[0];
+var nav = document.getElementsByTagName("nav")[0];
 var media_type = location.search.slice(location.search.search("media_type") + 11, location.length);
 var movie_id = location.search.slice(4, location.search.search("media_type") - 1);
-var main = document.getElementById("movie_content_wrapper");
 var main_content_head = document.getElementById("movie_content_head_wrapper");
 var title = document.getElementsByTagName("title")[0];
+var detailsModule = document.getElementById("details_module_wrapper");
+
+var windowPosition = window.pageYOffset;
+window.addEventListener('scroll', scrollingEffect);
+function scrollingEffect() {
+    let scrollPosition = window.pageYOffset;
+    if (scrollPosition > windowPosition) {
+        header.classList.remove("showed_header");
+        header.classList.add("closed_header");
+    };
+
+    if (scrollPosition <= windowPosition) {
+        header.classList.remove("closed_header");
+        header.classList.add("showed_header");
+    };
+    windowPosition = scrollPosition;
+};
 
 fetchAPI(`${media_type}/${movie_id}`, "movie");
 fetchAPI(`${media_type}/${movie_id}/credits`, "cast");
+fetchAPI(`${media_type}/${movie_id}/videos`, "posters");
+
+console.log(`${media_type}/${movie_id}`);
 
 async function fetchAPI(url, type) {
-    if (type == "movie") {
-        await fetch(`https://api.themoviedb.org/3/${url}?api_key=d14b1adbe04d8ccc380f0580684188f5&language=ru-RU`)
-        .then(res => res.json())
-        .then(obj => showMovieContent(obj));
-    }
-    if (type == "cast") {
-        await fetch(`https://api.themoviedb.org/3/${url}?api_key=d14b1adbe04d8ccc380f0580684188f5&language=ru-RU`)
-        .then(res => res.json())
-        .then(obj => showCast(obj.cast));
-    }
+    await fetch(`https://api.themoviedb.org/3/${url}?api_key=d14b1adbe04d8ccc380f0580684188f5&language=en-US`)
+    .then(res => res.json())
+    .then(obj => {
+        if (type == "movie") {
+            showMovieContent(obj);
+        };
+        if (type == "cast") {
+            showCast(obj.cast);
+        };
+        if (type == "posters") {
+            console.log(obj);
+        };
+    });
 };
 
 function getPercentColor(percent) {
@@ -69,19 +94,33 @@ function getProdutionCountry(arr) {
 function showCast(arr) {
     var cast_list_wrapper = document.getElementById("cast_wrapper");
     arr.forEach(cast => {
-        console.log(cast);
-        cast_list_wrapper.innerHTML += `
-        <div class="cast_card_wrapper">
-            <div class="cast_img_wrapper">
-                <img src="https://www.themoviedb.org/t/p/w138_and_h175_face${cast.profile_path}" class="cast_img">
+        if (cast.profile_path) {
+            cast_list_wrapper.innerHTML += `
+            <div class="cast_card_wrapper">
+                <div class="cast_img_wrapper">
+                    <div style="background-image: url(https://www.themoviedb.org/t/p/w138_and_h175_face${cast.profile_path});" class="cast_img">
+                </div>
+                <div class="cast_info_wrapper">
+                    <span class="cast_name">${cast.name ?? cast.original_name}</span>
+                    <span class="cast_original_name">${cast.character}</span>
+                    <!-- <span class="cast_episodes">9 эпизодов</span> -->
+                </div>
             </div>
-            <div class="cast_info_wrapper">
-                <span class="cast_name">${cast.name ?? cast.original_name}</span>
-                <span class="cast_original_name">${cast.character}</span>
-                <span class="cast_episodes">9 эпизодов</span>
+            `
+        } else {
+            cast_list_wrapper.innerHTML += `
+            <div class="cast_card_wrapper">
+                <div class="cast_img_wrapper without_img">
+                    <div style="background-image: url(https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-36-user-female-grey-d9222f16ec16a33ed5e2c9bbdca07a4c48db14008bbebbabced8f8ed1fa2ad59.svg);" class="anonymus_icon">
+                </div>
+                <div class="cast_info_wrapper">
+                    <span class="cast_name">${cast.name ?? cast.original_name}</span>
+                    <span class="cast_original_name">${cast.character}</span>
+                    <!-- <span class="cast_episodes">9 эпизодов</span> -->
+                </div>
             </div>
-        </div>
-        `
+            `
+        }
     })
 }
 
@@ -94,8 +133,8 @@ function showMovieContent(movie) {
         <div class="movie_content_head_wrapper" style="background-image: url(https://www.themoviedb.org/t/p/original${movie.backdrop_path});">
         <div class="movie_content_head">
             <div class="movie_img_wrapper">
-                <img onclick="movieInfo(\`show\`)" src="https://www.themoviedb.org/t/p/original${movie.poster_path}" class="movie_img">
-                <div class="img_info_link">
+                <img src="https://www.themoviedb.org/t/p/original${movie.poster_path}" class="movie_img">
+                <div onclick="detailModule(\`show\`, \`posters\`)" class="img_info_link">
                     <img class="fullscreen_icon" src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-216-fullscreen-white-87524788011715a9bd73de86ef577442070ebc9873a7abb2845a6310a7f6174a.svg">
                     Расширить
                 </div>
@@ -158,12 +197,12 @@ function showMovieContent(movie) {
                                 </div>
                             </div>
                         </div>
-                        <a class="movie_trailer_link">Воспроизвести трейлер</a>
+                        <a class="movie_trailer_link">Play Trailer</a>
                     </div>
                     <div class="movie_overview_wrapper">
                         <span class="movie_part_text">${movie.tagline}</span>
                         <div class="movie_overview">
-                            <span class="overview_title">Обзор</span>
+                            <span class="overview_title">Overwiew</span>
                             <div class="overview">
                                 ${getOverview(movie.overview)}
                             </div>
@@ -176,6 +215,17 @@ function showMovieContent(movie) {
     `;
 }
 
-function movieInfo() {
-    
-}
+function detailModule(status, module_type) {
+    if (status == "show" && detailsModule.className.toLowerCase().includes("closed")) {
+        detailsModule.classList.remove("closed");
+        nav.classList.add("module_active");
+        header.classList.add("module_active");
+        main.classList.add("module_active");
+    };
+    if (status == "close" && !detailsModule.className.toLowerCase().includes("closed")) {
+        detailsModule.classList.add("closed");
+        nav.classList.remove("module_active");
+        header.classList.remove("module_active");
+        main.classList.remove("module_active");
+    };
+};

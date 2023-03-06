@@ -18,12 +18,12 @@ const FILTERS = {
 var listFilters = [
     {
         backgrounded: false,
-        filterName: "В тренде",
+        filterName: "Trending",
         filterId: "trend",
         filter: [
             {
                 type: "filter",
-                name: "Сегодня",
+                name: "Today",
                 filter_media_type: "movie",
                 activation: function(wrapper, type) {
                     return fetchAPI(this.api, wrapper, this.filter_media_type, type);
@@ -32,7 +32,7 @@ var listFilters = [
             },
             {
                 type: "filter",
-                name: "На этой неделе",
+                name: "This week",
                 filter_media_type: "all",
                 activation: function(wrapper, type) {
                     return fetchAPI(this.api, wrapper, this.filter_media_type, type);
@@ -47,12 +47,12 @@ var listFilters = [
     },
     {
         backgrounded: true,
-        filterName: "Лучшие за всё время",
+        filterName: "Top Rated",
         filterId: "top_rated",
         filter: [
             {
                 type: "filter",
-                name: "По ТВ",
+                name: "On TV",
                 filter_media_type: "tv",
                 activation: function(wrapper, type) {
                     return fetchAPI(this.api, wrapper, this.filter_media_type, type);
@@ -61,7 +61,7 @@ var listFilters = [
             },
             {
                 type: "filter",
-                name: "В киносайтах",
+                name: "On TMDB",
                 filter_media_type: "movie",
                 activation: function(wrapper, type) {
                     return fetchAPI(this.api, wrapper, this.filter_media_type, type);
@@ -76,12 +76,12 @@ var listFilters = [
     },
     {
         backgrounded: false,
-        filterName: "Что популярно",
+        filterName: "What's Popular",
         filterId: "popular",
         filter: [
             {
                 type: "filter",
-                name: "По ТВ",
+                name: "On TV",
                 filter_media_type: "tv",
                 activation: function(wrapper, type) {
                     return fetchAPI(this.api, wrapper, this.filter_media_type, type);
@@ -90,7 +90,7 @@ var listFilters = [
             },
             {
                 type: "filter",
-                name: "В кинотеатрах",
+                name: "In Theatres",
                 filter_media_type: "movie",
                 activation: function(wrapper, type) {
                     return fetchAPI(this.api, wrapper, this.filter_media_type, type);
@@ -106,18 +106,18 @@ var listFilters = [
 ];
 
 var months = [
-    "январь",
-    "февраль",
-    "март",
-    "апрель",
-    "май",
-    "июнь",
-    "июль",
-    "авгутс",
-    "сентябрь",
-    "октябрь",
-    "ноябрь",
-    "декабрь",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
 ];
 
 var windowPosition = window.pageYOffset;
@@ -137,13 +137,7 @@ function scrollingEffect() {
 };
 
 async function fetchAPI(url, results_wrapper, media_type, type, page = 1) {
-    await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU&page=${page}`)
-    .then(result => result.json())
-    .then(obj => showMovie(obj.results, results_wrapper, media_type, type));
-};
-
-async function logAPI(url, media_type, type, page = 1) {
-    await fetch(`${main_api_url}${url}api_key=${api_key}&language=ru-RU&page=${page}`)
+    await fetch(`${main_api_url}${url}api_key=${api_key}&language=en-US&page=${page}`)
     .then(result => result.json())
     .then(obj => showMovie(obj.results, results_wrapper, media_type, type));
 };
